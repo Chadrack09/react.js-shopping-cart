@@ -11,6 +11,9 @@ class Modal extends Component {
       symbol: "₹",
       currency: {},
     }
+    
+    this.incrementItem = this.incrementItem.bind(this);
+    this.decrementItem = this.decrementItem.bind(this);
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -28,6 +31,14 @@ class Modal extends Component {
     if(this.props.open) {
       this.props.overlayClose();
     }
+  }
+
+  incrementItem = (item) => () => {
+    console.log("Incrementing...");
+  }
+
+  decrementItem = (item) => () => {
+    console.log("Decrementing...");
   }
 
   render() {
@@ -93,11 +104,11 @@ class Modal extends Component {
                           }
                         </div>
                         <div className="item-btn-container">
-                          <div className="item-sign" /* onClick={this.incrementItem(item)} */>
+                          <div className="item-sign" onClick={this.incrementItem(item)}>
                             <span>{"+"}</span>
                           </div>
                           <div className="item-qty">{item.qty}</div>
-                          <div className="item-sign" /* onClick={this.decrementItem(item)} */>
+                          <div className="item-sign" onClick={this.decrementItem(item)}>
                             <span>{"-"}</span>
                           </div>
                         </div>
