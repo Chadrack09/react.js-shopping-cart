@@ -1,6 +1,6 @@
 import client from "../../service/Client";
 import { FETCH_CATEGORIES_QUERY } from "../../service/Queries";
-import { FETCH_CATEGORIES } from "../types";
+import { FETCH_CATEGORIES, SET_CATEGORY } from "../types";
 
 export const fetchCategoriesActions = () => async (dispatch) => {
   let { data } = await client
@@ -12,5 +12,16 @@ export const fetchCategoriesActions = () => async (dispatch) => {
   dispatch({
     type: FETCH_CATEGORIES,
     payload: data.categories,
+  });
+  dispatch({
+    type: SET_CATEGORY,
+    payload: data.categories[0],
+  });
+};
+
+export const setCategoryAction = (category) => (dispatch) => {
+  dispatch({
+    type: SET_CATEGORY,
+    payload: category,
   });
 };
