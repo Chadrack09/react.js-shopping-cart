@@ -147,7 +147,7 @@ class Header extends Component {
               {/* Cart Icon */}
               <CartContainer>
                 <CartLogo src={CartIcon} onClick={this.cartIconEvent} />
-                <CartCounter>0</CartCounter>
+                <CartCounter>{this.props.totalQty}</CartCounter>
               </CartContainer>
 
               {/* Cart Modal */}
@@ -170,6 +170,7 @@ const mapStateToProps = (state) => {
     category: state.category,
     currencies: state.currencies,
     currencySelected: state.currencySelected,
+    totalQty: state.cart.totalQty,
   };
 };
 

@@ -1,16 +1,24 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 
 class Modal extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      cart: [],
+      cart: {},
       totalQty: 0,
-      symbol: "₹"
+      symbol: "₹",
+      currency: {},
     }
   }
-  
+
+  static getDerivedStateFromProps(props, state) {
+    return {
+      cart: props.cart,
+      currency: props.currency[0],
+    };
+  }
 
   componentDidCatch(error, info) {
     console.log(error.message, info);
@@ -32,21 +40,21 @@ class Modal extends Component {
             <div className="modal-content">
               <div className="modal-header bag-title ">
                 <span><span style={{ fontWeight: "700" }}>My Bag,</span> 
-                  {this.state.totalQty === 0 ? '0 item' : this.state.totalQty + ' items'}
+                  {this.state.cart.totalQty === 0 ? '0 item' : this.state.cart.totalQty + ' items'}
                 </span>
               </div>
               <div className="modal-body">
                 {
-                  this.state.cart.length > 0 ? (
-                    this.state.cart.map((item, index) => (
+                  this.state.cart.cartItems.length > 0 ? (
+                    this.state.cart.cartItems.map((item, index) => (
                       <div className="cart-items" key={index}>
                         <div className="item-desc">
                           <div className="item-brand">{item.brand}</div>
                           <div className="item-name">{item.name}</div>
-                          <div className="item-price" style={{fontWeight: "500"}}>{this.state.symbol}{` `}
+                          <div className="item-price" style={{fontWeight: "500"}}>{this.state.currency.symbol}{` `}
                           { 
-                            item.prices.filter(price => 
-                            price.currency.symbol === this.state.symbol)[0].amount
+                            item.prices.filter(price => price.currency.symbol === 
+                              this.state.currency.symbol)[0].amount
                           }
                           </div>
                           {
@@ -62,7 +70,7 @@ class Modal extends Component {
                                         <div className="item-property" key={index}>
                                           <input type="radio" name={`${item.name}-${attr.name}`} 
                                                   id={property.id} value={property.value} 
-                                                  onChange={this.radioChangeEvent(item.id, attr.name)} />
+                                                  /* onChange={this.radioChangeEvent(item.id, attr.name)} */ />
                                           <label htmlFor={property.id}>
                                             <div className={attr.type === 'swatch' ? 'item-property-swatch' : 'item-property-text'} 
                                                   style={ property.checked && attr.type === 'text' 
@@ -85,11 +93,11 @@ class Modal extends Component {
                           }
                         </div>
                         <div className="item-btn-container">
-                          <div className="item-sign" onClick={this.incrementItem(item)}>
+                          <div className="item-sign" /* onClick={this.incrementItem(item)} */>
                             <span>{"+"}</span>
                           </div>
                           <div className="item-qty">{item.qty}</div>
-                          <div className="item-sign" onClick={this.decrementItem(item)}>
+                          <div className="item-sign" /* onClick={this.decrementItem(item)} */>
                             <span>{"-"}</span>
                           </div>
                         </div>
@@ -112,14 +120,14 @@ class Modal extends Component {
                     <span>Total</span>
                   </div>
                   <div>
-                    <span>{this.state.symbol}{` `}</span>
+                    <span>{this.state.currency.symbol}{` `}</span>
                     <span>
                       {
-                        this.state.cart.length > 0 ? 
+                        this.state.cart.cartItems.length > 0 ? 
                         (
-                        this.state.cart.reduce((acc, item) =>
+                        this.state.cart.cartItems.reduce((acc, item) =>
                           acc + (item.prices.filter(price => 
-                            price.currency.symbol === this.state.symbol)[0].amount * item.qty), 0).toFixed(2) 
+                            price.currency.symbol === this.state.currency.symbol)[0].amount * item.qty), 0).toFixed(2) 
                         ) : 0
                       }
                     </span>
@@ -144,4 +152,9 @@ class Modal extends Component {
   }
 }
 
-export default Modal;
+const mapStateToProps = state => ({
+  cart: state.cart,
+  currency: state.currencySelected,
+})
+
+export default connect(mapStateToProps)(Modal);

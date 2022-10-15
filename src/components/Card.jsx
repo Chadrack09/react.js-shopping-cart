@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Logo from "../assets/svg/CartIconLight.svg";
-import { addToCartAction } from '../redux/actions/AddToCart';
 import { filterProductsByCategory } from '../redux/actions/FetchProducts';
 import store from '../redux/store';
 import { ADD_TO_CART, FILTER_PRODUCTS_BY_CATEGORY } from '../redux/types';
@@ -44,6 +43,7 @@ class Card extends Component {
       type: ADD_TO_CART,
       payload: {
         product: product,
+        currency: this.state.currency,
       }
     });
     console.log("From addToCartClickEvent: ", product);
