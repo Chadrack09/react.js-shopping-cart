@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { connect } from "react-redux";
+import { fetchProductsActions } from "./redux/actions/FetchProducts";
+import {
+  fetchCategoriesActions,
+  setCategoryAction,
+} from "./redux/actions/FetchCategories";
+import { fetchCurrenciesActions } from "./redux/actions/FetchCurrencies";
+import Header from "./components/navbar/Header";
+import ProductList from "./pages/ProductList";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import NotFound from "./components/NotFound";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.props.fetchProducts();
+    this.props.fetchCategories();
+    this.props.fetchCurrencies();
+  }
+
+  render() {
+    return (
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<ProductList />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Router>
+    );
+  }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchProducts: () => dispatch(fetchProductsActions()),
+    fetchCategories: () => dispatch(fetchCategoriesActions()),
+    fetchCurrencies: () => dispatch(fetchCurrenciesActions()),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(App);

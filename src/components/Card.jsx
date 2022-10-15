@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Logo from "../assets/svg/CartIconLight.svg";
+import { addToCartAction } from '../redux/actions/AddToCart';
+import { filterProductsByCategory } from '../redux/actions/FetchProducts';
+import store from '../redux/store';
+import { ADD_TO_CART, FILTER_PRODUCTS_BY_CATEGORY } from '../redux/types';
 
 class Card extends Component {
 
@@ -11,7 +15,11 @@ class Card extends Component {
       symbol: "₹",
       currency: {},
       products: [],
+      productsFiltered: [],
+      category: {},
     }
+
+    this.addToCartClickEvent = this.addToCartClickEvent.bind(this);
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -19,6 +27,9 @@ class Card extends Component {
       return {
         currency: props.currency[0],
         products: props.products,
+        productsFiltered: props.productsFiltered,
+        category: props.category,
+
       }
     }
     return null;
@@ -28,13 +39,22 @@ class Card extends Component {
     console.log(error.message, info);
   }
 
+  addToCartClickEvent = (product) => () => {
+    store.dispatch({
+      type: ADD_TO_CART,
+      payload: {
+        product: product,
+      }
+    });
+    console.log("From addToCartClickEvent: ", product);
+  }
+
   render() {
-    console.log(this.state.currency);
-    console.log(this.state.products);
+
     return (
-        this.state.products.length > 0 ?
+        this.state.productsFiltered.length > 0 ?
         (
-          this.state.products.map((item, index) => (
+          this.state.productsFiltered.map((item, index) => (
           <div className="card-item" key={index}>
             <span className={ !item.inStock ? "stock-state" : "" }>
               { item.inStock ? "" : (<p className="stock-text">out of stock</p>) }</span>
@@ -48,7 +68,7 @@ class Card extends Component {
             </div>
             </Link>
             <div className="break">
-              <div className="logo-container" /* onClick={this.addToCartClickEvent(item)} */ >
+              <div className="logo-container" onClick={this.addToCartClickEvent(item)} >
                 <div style={{ width: "24px", height: "24px", marginLeft: "12px" }}>
                 <img className={`logo-light`} src={Logo} alt="item" /></div>
               </div>
@@ -75,7 +95,17 @@ class Card extends Component {
 
 const mapStateToProps = state => ({
   products: state.products,
+  productsFiltered: state.productsFiltered.products,
+  category: state.categorySelected,
   currency: state.currencySelected,
+  productsFiltered: state.productsFiltered.products
 });
 
-export default connect(mapStateToProps)(Card);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    filterProductsByCategory: (category) => 
+    dispatch(filterProductsByCategory(category)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Card);

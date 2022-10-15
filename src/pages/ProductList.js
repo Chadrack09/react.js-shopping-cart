@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Card from "../components/Card";
 import "../css/ProductList.css";
 
@@ -6,26 +7,40 @@ class ProductList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      category: "all",
+      category: {},
     };
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (
+      props.categorySelected !== undefined &&
+      props.categorySelected !== state.category
+    ) {
+      return {
+        category: props.categorySelected,
+      };
+    }
+    return null;
   }
 
   render() {
     return (
       <div className="main-container c-container">
-        <div className="category-title">{this.state.category}</div>
+        <div className="category-title">{this.state.category.name}</div>
         <div className="line-break"></div>
         <div className="card-container">
           <Card />
         </div>
-        <div>
-          <h1>New List</h1>
-          <br />
-          <div></div>
-        </div>
+        <div style={{ height: "250px" }}></div>
       </div>
     );
   }
 }
 
-export default ProductList;
+const mapStateToProps = (state) => {
+  return {
+    categorySelected: state.categorySelected[0],
+  };
+};
+
+export default connect(mapStateToProps)(ProductList);
