@@ -4,7 +4,6 @@ import { ADD_TO_CART } from "../types";
 const initialState = {
   cartItems: [],
   totalQty: 0,
-  totalAmount: 0,
 };
 
 export const addToCartReducer = (state = initialState, action) => {
@@ -13,15 +12,12 @@ export const addToCartReducer = (state = initialState, action) => {
       let item = action.payload.product;
       let inCart = false;
       let currency = action.payload.currency;
-      let firstAmount = state.cartItems;
 
       state.cartItems.forEach((cartItem) => {
         if (cartItem.id === item.id) {
           inCart = true;
         }
       });
-
-      state.cartItems.forEach((cartItem) => {});
 
       return {
         ...state,
@@ -35,14 +31,14 @@ export const addToCartReducer = (state = initialState, action) => {
 
         totalQty: state.totalQty + 1,
 
-        totalAmount: state.cartItems.reduce(
+        /* totalAmount: state.cartItems.reduce(
           (acc, item) =>
             (acc +=
               item.prices.filter(
                 (price) => price.currency.symbol === currency.symbol
               )[0].amount * item.qty),
           state.totalAmount
-        ),
+        ) */
       };
     }
 
