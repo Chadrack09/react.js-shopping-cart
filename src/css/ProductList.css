@@ -1,0 +1,133 @@
+.main-container {
+  background-color: rgb(237, 237, 237);
+  width: 100%;
+  height: auto;
+  padding: 0;
+  border-top: 0.001rem solid rgb(255, 255, 255);
+}
+
+.category-title {
+  margin-top: 80px;
+  font-size: 42px;
+  text-transform: uppercase;
+}
+
+.line-break {
+  width: 100%;
+  height: 103px;
+  background-color: rgb(164, 104, 230);
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1.5rem;
+  justify-items: center;
+}
+
+/* Media queries */
+@media (max-width: 1280px) {
+  .card-container {
+      grid-template-columns: repeat(2, 1fr); 
+  }
+}
+@media (max-width: 842px) {
+  
+  .card-container {
+      grid-template-columns: 1fr;
+  }
+}
+
+/* Card CSS Styles */
+/* .card-content {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(196, 203, 54);
+
+    width: 100%;
+
+} */
+.card-item {
+  background-color: rgb(197, 55, 55);
+  display: flex;
+  flex-direction: column;
+  width: 386px;
+  padding: 1rem;
+  height: 444px;
+  position: relative;
+  /* transition: transform 500ms ease; */
+}
+.card-item:hover {
+  /* transform: scale(1.009); */
+  box-shadow: 0px 4px 35px 0px rgba(168, 172, 176, 0.19);
+}
+.card-image {
+  width: 354px;
+  height: 330px;
+  position: relative;
+}
+.logo-container {
+  background-color: #5ECE7B;;
+  width: 52px;
+  height: 52px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin-right: 15px;
+  margin-top: 15px;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  
+}
+.card-image-item {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+.break {
+  width: 100%;
+  height: 24px;
+  background-color: rgb(44, 69, 60, 0.5);
+  position: relative;
+  opacity: 0;
+}
+
+.logo-opacity-null {
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+
+.stock-state {
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  background: rgba(141, 143, 154, 1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stock-text {
+  font-size: 24px;
+  font-weight: 400;
+  z-index: 2;
+  text-transform: uppercase;
+}
+
+.card-item .break {
+  opacity: 0;
+}
+.card-item:hover .break {
+  opacity: 100%;
+}
+
+.break .logo-container {
+  cursor: pointer;
+}
