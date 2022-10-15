@@ -12,6 +12,8 @@ export const addToCartReducer = (state = initialState, action) => {
     case ADD_TO_CART: {
       let item = action.payload.product;
       let inCart = false;
+      let currency = action.payload.currency;
+      let firstAmount = state.cartItems;
 
       state.cartItems.forEach((cartItem) => {
         if (cartItem.id === item.id) {
@@ -19,10 +21,10 @@ export const addToCartReducer = (state = initialState, action) => {
         }
       });
 
-      console.log("Already in cart", inCart);
-      console.log("Item From PayLoad", item);
+      state.cartItems.forEach((cartItem) => {});
 
       return {
+        ...state,
         cartItems: inCart
           ? state.cartItems.map((cartItem) =>
               cartItem.id === item.id
@@ -30,8 +32,17 @@ export const addToCartReducer = (state = initialState, action) => {
                 : cartItem
             )
           : [...state.cartItems, { ...item, qty: 1 }],
+
         totalQty: state.totalQty + 1,
-        totalAmount: 0,
+
+        totalAmount: state.cartItems.reduce(
+          (acc, item) =>
+            (acc +=
+              item.prices.filter(
+                (price) => price.currency.symbol === currency.symbol
+              )[0].amount * item.qty),
+          state.totalAmount
+        ),
       };
     }
 
