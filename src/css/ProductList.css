@@ -20,45 +20,29 @@
 
 .card-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 1.5rem;
+  grid-template-columns: repeat(3, 368px);
+  column-gap: 40px;
+  row-gap: 103px;
+  justify-content: center;
   justify-items: center;
 }
 
-/* Media queries */
-@media (max-width: 1280px) {
-  .card-container {
-      grid-template-columns: repeat(2, 1fr); 
-  }
-}
-@media (max-width: 842px) {
-  
-  .card-container {
-      grid-template-columns: 1fr;
-  }
-}
-
-/* Card CSS Styles */
-/* .card-content {
-    display: flex;
-    justify-content: center;
-    background-color: rgb(196, 203, 54);
-
-    width: 100%;
-
-} */
+/* Card Item CSS Styles */
 .card-item {
   background-color: rgb(197, 55, 55);
   display: flex;
   flex-direction: column;
   width: 386px;
-  padding: 1rem;
   height: 444px;
   position: relative;
-  /* transition: transform 500ms ease; */
+  align-items: center;
 }
+.card-block {
+  width: 354px;
+  margin-top: 16px;
+}
+
 .card-item:hover {
-  /* transform: scale(1.009); */
   box-shadow: 0px 4px 35px 0px rgba(168, 172, 176, 0.19);
 }
 .card-image {
@@ -66,7 +50,8 @@
   height: 330px;
   position: relative;
 }
-.logo-container {
+
+.logo-add-to-cart {
   background-color: #5ECE7B;;
   width: 52px;
   height: 52px;
@@ -78,8 +63,16 @@
   border-radius: 100%;
   display: flex;
   align-items: center;
-  
+  justify-content: center;
 }
+
+.logo-add-to-cart img {
+  width: 24px;
+  height: 24px;
+  margin-right: 3px;
+  margin-top: 2px;
+}
+
 .card-image-item {
   width: 100%;
   height: 100%;
@@ -87,16 +80,27 @@
   cursor: pointer;
 }
 .break {
-  width: 100%;
+  width: 354px;
   height: 24px;
-  background-color: rgb(44, 69, 60, 0.5);
-  position: relative;
+  position: absolute;
   opacity: 0;
+  /* background-color: rgb(44, 69, 60, 0.5); */
 }
 
 .logo-opacity-null {
   opacity: 0;
   transition: opacity 500ms ease;
+}
+
+.card-item .break {
+  opacity: 0;
+}
+.card-item:hover .break {
+  opacity: 100%;
+}
+
+.break .logo-add-to-cart {
+  cursor: pointer;
 }
 
 .stock-state {
@@ -121,13 +125,19 @@
   text-transform: uppercase;
 }
 
-.card-item .break {
-  opacity: 0;
-}
-.card-item:hover .break {
-  opacity: 100%;
+.card-text {
+  margin-top: 24px;
 }
 
-.break .logo-container {
-  cursor: pointer;
+/* Media queries */
+@media (max-width: 1280px) {
+  .card-container {
+      grid-template-columns: repeat(2, 1fr); 
+  }
+}
+@media (max-width: 842px) {
+  
+  .card-container {
+      grid-template-columns: 1fr;
+  }
 }
