@@ -49,7 +49,6 @@ class Header extends Component {
 
     let currency = this.props.currencies
       .filter(e => typeof e !== undefined).shift();
-    // console.log("From Did Update", prevProps);
     
     if (currency !== undefined) {
       let currencySelected = store.getState().currencySelected;
