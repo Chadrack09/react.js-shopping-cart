@@ -1,4 +1,6 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&display=swap');
+
 body {
   margin: 0;
   font-family: 'Raleway', 'Segoe UI', 'Roboto', 'Oxygen',
@@ -30,6 +32,51 @@ code {
     monospace;
 }
 
+
+.c-container {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Media Queries */
+
+@media (min-width: 576px) {
+  .c-container {
+      max-width: 672px;
+  }
+}
+
+@media (min-width: 768px) {
+  .c-container {
+      max-width: 872px;
+  }
+}
+
+@media (min-width: 992px) {
+  .c-container {
+      max-width: 990px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .c-container {
+    max-width: 1238px;
+  }
+}
+@media (min-width: 1500px) {
+  .c-container {
+    max-width: 1440px;
+  }
+}
+
+
+/* Custom Scrollbar */
+
 ::-webkit-scrollbar {
   width: .6rem;
   height: .6rem;
@@ -44,49 +91,4 @@ code {
 ::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 100vw;
-}
-
-.c-container {
-  --bs-gutter-x: 1.5rem;
-  --bs-gutter-y: 0;
-  width: 100%;
-  padding-right: calc(var(--bs-gutter-x) * 0.5);
-  padding-left: calc(var(--bs-gutter-x) * 0.5);
-  margin-right: auto;
-  margin-left: auto;
-}
-
-@media (min-width: 576px) {
-  .c-container {
-      /* max-width: 540px; */
-      max-width: 672px;
-  }
-}
-
-@media (min-width: 768px) {
-  .c-container {
-      /* max-width: 720px; */
-      max-width: 872px;
-  }
-}
-
-@media (min-width: 992px) {
-  .c-container {
-      max-width: 990px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .c-container {
-      /* max-width: 1140px; */
-      max-width: 1238px;
-  }
-  /* .card-container {
-      grid-template-columns: repeat(2, 1fr);
-  } */
-}
-@media (min-width: 1400px) {
-  .c-container {
-      max-width: 1320px;
-  }
 }
