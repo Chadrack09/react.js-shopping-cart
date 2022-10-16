@@ -41,12 +41,8 @@ class Card extends Component {
   addToCartClickEvent = (product) => () => {
     store.dispatch({
       type: ADD_TO_CART,
-      payload: {
-        product: product,
-        currency: this.state.currency,
-      }
+      payload: product
     });
-    console.log("From addToCartClickEvent: ", product);
   }
 
   render() {

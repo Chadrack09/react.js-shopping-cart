@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import store from '../../redux/store';
+import { ADD_TO_CART, DECREMENT_QTY, INCREMENT_QTY, REMOVE_FROM_CART } from '../../redux/types';
 
 class Modal extends Component {
 
@@ -34,11 +36,17 @@ class Modal extends Component {
   }
 
   incrementItem = (item) => () => {
-    console.log("Incrementing...");
+    store.dispatch({
+      type: ADD_TO_CART,
+      payload: item
+    })
   }
 
   decrementItem = (item) => () => {
-    console.log("Decrementing...");
+    store.dispatch({
+      type: REMOVE_FROM_CART,
+      payload: item
+    })
   }
 
   render() {

@@ -1,5 +1,5 @@
 import store from "../store";
-import { ADD_TO_CART } from "../types";
+import { ADD_TO_CART, REMOVE_FROM_CART } from "../types";
 
 const initialState = {
   cartItems: [],
@@ -9,9 +9,8 @@ const initialState = {
 export const addToCartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_CART: {
-      let item = action.payload.product;
+      let item = action.payload;
       let inCart = false;
-      let currency = action.payload.currency;
 
       state.cartItems.forEach((cartItem) => {
         if (cartItem.id === item.id) {
@@ -29,17 +28,38 @@ export const addToCartReducer = (state = initialState, action) => {
             )
           : [...state.cartItems, { ...item, qty: 1 }],
 
-        totalQty: state.totalQty + 1,
-
-        /* totalAmount: state.cartItems.reduce(
-          (acc, item) =>
-            (acc +=
-              item.prices.filter(
-                (price) => price.currency.symbol === currency.symbol
-              )[0].amount * item.qty),
-          state.totalAmount
-        ) */
+        totalQty: state.cartItems.reduce((acc, item) => acc + item.qty, 1),
       };
+    }
+
+    case REMOVE_FROM_CART: {
+      let item = action.payload;
+
+      let itemToRemove = state.cartItems.find(
+        (cartItem) => cartItem.id === item.id
+      );
+
+      let newState = {};
+
+      if (itemToRemove.qty <= 1) {
+        return (newState = {
+          ...state,
+          cartItems: state.cartItems.filter(
+            (cartItem) => cartItem.id !== item.id
+          ),
+          totalQty: state.totalQty - 1,
+        });
+      } else {
+        return (newState = {
+          ...state,
+          cartItems: state.cartItems.map((cartItem) =>
+            cartItem.id === item.id
+              ? { ...cartItem, qty: cartItem.qty - 1 }
+              : cartItem
+          ),
+          totalQty: state.totalQty - 1,
+        });
+      }
     }
 
     default:
