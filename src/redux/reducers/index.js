@@ -5,11 +5,16 @@ import {
   currenciesReducer,
   currencySelectedReducer,
 } from "./CurrenciesReducer";
-import { filteredProductsReducer, productsReducer } from "./ProductsReducer";
+import {
+  filteredProductsReducer,
+  productDetailsReducer,
+  productsReducer,
+} from "./ProductsReducer";
 
 const rootReducer = combineReducers({
   products: productsReducer,
   productsFiltered: filteredProductsReducer,
+  productDetails: productDetailsReducer,
   categories: categoriesReducer,
   categorySelected: categoryReducer,
   currencies: currenciesReducer,
