@@ -10,6 +10,7 @@ import Header from "./components/navbar/Header";
 import ProductList from "./pages/ProductList";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NotFound from "./components/NotFound";
+import ProductDetails from "./pages/ProductDetails";
 
 class App extends React.Component {
   constructor(props) {
@@ -25,6 +26,7 @@ class App extends React.Component {
       <Router>
         <Header />
         <Routes>
+          <Route path="/details/:id" element={<ProductDetails />} />
           <Route path="/" element={<ProductList />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

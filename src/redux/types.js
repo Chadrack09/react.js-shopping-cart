@@ -12,3 +12,5 @@ export const ADD_TO_CART = "ADD_TO_CART";
 
 /** @description this action decreases item qty and remove when qty is 0 */
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+
+export const PRODUCT_DETAILS = "PRODUCT_DETAILS";

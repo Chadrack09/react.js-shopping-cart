@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Logo from "../assets/svg/CartIconLight.svg";
 import { filterProductsByCategory } from '../redux/actions/FetchProducts';
 import store from '../redux/store';
-import { ADD_TO_CART, FILTER_PRODUCTS_BY_CATEGORY } from '../redux/types';
+import { ADD_TO_CART, FILTER_PRODUCTS_BY_CATEGORY, PRODUCT_DETAILS } from '../redux/types';
 
 class Card extends Component {
 
@@ -19,6 +19,7 @@ class Card extends Component {
     }
 
     this.addToCartClickEvent = this.addToCartClickEvent.bind(this);
+    this.itemClickEvent = this.itemClickEvent.bind(this);
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -45,6 +46,14 @@ class Card extends Component {
     });
   }
 
+  itemClickEvent = (item) => () => {
+    console.log(item)
+    store.dispatch({
+      type: PRODUCT_DETAILS,
+      payload: item
+    });
+  }
+
   render() {
 
     return (
@@ -52,34 +61,36 @@ class Card extends Component {
         (
           this.state.productsFiltered.map((item, index) => (
           <div className="card-item" key={index}>
-            <span className={ !item.inStock ? "stock-state" : "" }>
-              { item.inStock ? "" : (<p className="stock-text">out of stock</p>) }</span>
-            <Link to={`/details/${item.id}`} /*onClick={this.itemDetailsEvent([item])} */ >
-            <div className="card-image">
-              <img
-                className="card-image-item"
-                src={item.gallery[0]}
-                alt={item.name}
-                /* onClick={this.itemClickEvent(item.inStock)} */ />
-            </div>
-            </Link>
-            <div className="break">
-              <div className="logo-container" onClick={this.addToCartClickEvent(item)} >
-                <div style={{ width: "24px", height: "24px", marginLeft: "12px" }}>
-                <img className={`logo-light`} src={Logo} alt="item" /></div>
+            <div className="card-block">
+              <span className={ !item.inStock ? "stock-state" : "" }>
+                { item.inStock ? "" : (<p className="stock-text">out of stock</p>) }</span>
+              <div className="card-image">
+                <Link to={`/details/${item.id}`} /*onClick={this.itemDetailsEvent([item])} */ >
+                  <img
+                    className="card-image-item"
+                    src={item.gallery[0]}
+                    alt={item.name}
+                    onClick={this.itemClickEvent(item)} />
+                </Link>
               </div>
-            </div>
-            <div className="card-text" style={{ fontSize: "18px" }}>
-              <div className="card-title">{item.name}</div>
-              <div className="card-price" style={{ fontWeight: "500" }}>
-                {
-                    this.state.currency.symbol === null 
-                    ? this.state.symbol : this.state.currency.symbol
-                }
-                { 
-                  item.prices.filter(price => price.currency.symbol 
-                    === this.state.currency.symbol)[0].amount
-                }
+                { item.attributes.length > 0 ? null :
+                (<div className="break">
+                    <div className="logo-add-to-cart" onClick={this.addToCartClickEvent(item)} >
+                      <img className={`logo-light`} src={Logo} alt="item" />
+                    </div>
+                  </div>)}
+              <div className="card-text" style={{ fontSize: "18px" }}>
+                <div className="card-title">{item.name}</div>
+                <div className="card-price" style={{ fontWeight: "500" }}>
+                  {
+                      this.state.currency.symbol === null 
+                      ? this.state.symbol : this.state.currency.symbol
+                  }
+                  { 
+                    item.prices.filter(price => price.currency.symbol 
+                      === this.state.currency.symbol)[0].amount
+                  }
+                </div>
               </div>
             </div>
           </div>
