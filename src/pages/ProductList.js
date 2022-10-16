@@ -25,13 +25,13 @@ class ProductList extends Component {
 
   render() {
     return (
-      <div className="main-container c-container">
+      <div className="c-container" style={{ backgroundColor: "#eee" }}>
         <div className="category-title">{this.state.category.name}</div>
         <div className="line-break"></div>
         <div className="card-container">
           <Card />
         </div>
-        <div style={{ height: "250px" }}></div>
+        <div style={{ height: "191px" }}></div>
       </div>
     );
   }
