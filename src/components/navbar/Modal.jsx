@@ -78,14 +78,14 @@ class Modal extends Component {
                           </div>
                           {
                             item.attributes.length > 0 ? (
-                              item.attributes.slice(0, 2).map((attr, index) => (
+                              item.attributes.map((attr, index) => (
                                 <div className="item-property-container" key={index}>
                                   <div className="item-property-title">
                                     <span>{attr.name}</span>
                                   </div>
                                   <div className='item-property-content'>
                                     {
-                                      attr.items.slice(0, 3).map((property, index) => (
+                                      attr.items.map((property, index) => (
                                         <div className="item-property" key={index}>
                                           <input type="radio" name={`${item.name}-${attr.name}`} 
                                                   id={property.id} value={property.value} 

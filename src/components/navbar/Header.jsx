@@ -13,7 +13,6 @@ import { CURRENCY_SELECTED } from "../../redux/types";
 import store from "../../redux/store";
 import { CartContainer, CartCounter, CartLogo } from "./CartStyles";
 import Modal from "./Modal";
-import { filterProductsByCategory } from "../../redux/actions/FetchProducts";
 
 class Header extends Component {
 
@@ -33,7 +32,6 @@ class Header extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    // console.log("From getDerivedStateFromProps", props);
 
     if(props.currencySelected.length > 0 && props.products.length > 0) {
       return {

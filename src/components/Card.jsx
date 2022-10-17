@@ -95,7 +95,7 @@ class Card extends Component {
             </div>
           </div>
         ))
-      ) : (<div>No Card Loaded...</div>)
+      ) : (<div>Card Loading...</div>)
     )
   }     
 }
