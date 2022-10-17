@@ -8,7 +8,6 @@ class ProductDetails extends Component {
     return (
       <div className="c-container item-container">
         <h1>Product Details</h1>
-        <p>{this.props.product.id}</p>
 
         <ItemDetails product={this.props.product} />
         <div style={{ height: "178px" }}></div>

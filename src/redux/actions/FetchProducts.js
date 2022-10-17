@@ -9,6 +9,27 @@ import {
   FILTER_PRODUCTS_BY_CATEGORY,
 } from "../types";
 
+/**
+ *
+ * @param {Object} dispatch
+ *
+ * @description Fetches all products from server and dispatches the results
+ * to redux store by adding a new property to the product object called `checked`
+ * to set default attributes value.
+ *
+ * @type {Boolean} checked
+ *
+ * ```js
+ * let destructuredData = data.category.products.map((product) => { --- line 38
+ * return {
+ *   ...item,
+ *   checked: index === 0 ? true : false,
+ * };
+ *```
+ * @see {@link src\redux\reducers\ProductsReducer.js:48} for more information
+ * @author [Chaadrack B.](https://github.com/Chadrack09)
+ *
+ */
 export const fetchProductsActions = () => async (dispatch) => {
   let { data } = await client
     .query({
@@ -22,10 +43,10 @@ export const fetchProductsActions = () => async (dispatch) => {
       attributes: product.attributes.map((attribute) => {
         return {
           ...attribute,
-          items: attribute.items.map((item) => {
+          items: attribute.items.map((item, index) => {
             return {
               ...item,
-              checked: false, // This is the new property we are adding to the object
+              checked: index === 0 ? true : false, // new property added to products
             };
           }),
         };
