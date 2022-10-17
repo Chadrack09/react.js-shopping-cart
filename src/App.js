@@ -29,6 +29,7 @@ class App extends React.Component {
           <Route path="/details/:id" element={<ProductDetails />} />
           <Route path="/" element={<ProductList />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/details/*" element={<NotFound />} />
         </Routes>
       </Router>
     );
