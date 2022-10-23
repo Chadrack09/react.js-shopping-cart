@@ -1,16 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchProductsActions } from "./redux/actions/FetchProducts";
-import {
-  fetchCategoriesActions,
-  setCategoryAction,
-} from "./redux/actions/FetchCategories";
+import { fetchCategoriesActions } from "./redux/actions/FetchCategories";
 import { fetchCurrenciesActions } from "./redux/actions/FetchCurrencies";
 import Header from "./components/navbar/Header";
 import ProductList from "./pages/ProductList";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NotFound from "./components/NotFound";
 import ProductDetails from "./pages/ProductDetails";
+import Cart from "./pages/Cart";
 
 class App extends React.Component {
   constructor(props) {
@@ -26,10 +24,10 @@ class App extends React.Component {
       <Router>
         <Header />
         <Routes>
-          <Route path="/details/:id" element={<ProductDetails />} />
+          <Route path={`/:link/:id`} element={<ProductDetails />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/" element={<ProductList />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="/details/*" element={<NotFound />} />
         </Routes>
       </Router>
     );

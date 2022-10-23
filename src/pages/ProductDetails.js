@@ -4,11 +4,10 @@ import ItemDetails from "../components/ItemDetails";
 import "../css/ProductDetails.css";
 
 class ProductDetails extends Component {
+  
   render() {
     return (
       <div className="c-container item-container">
-        <h1>Product Details</h1>
-
         <ItemDetails product={this.props.product} />
         <div style={{ height: "178px" }}></div>
       </div>
@@ -18,7 +17,7 @@ class ProductDetails extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    product: state.productDetails.product,
+    product: state.productDetails,
   };
 };
 
