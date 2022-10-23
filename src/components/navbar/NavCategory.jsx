@@ -45,12 +45,12 @@ class NavCategory extends Component {
   }
 
   categoryClickEvent = (category) => () => {
-    console.log("Category Click Event", category);
     store.dispatch({
       type: SET_CATEGORY,
       payload: category
     });
-    this.props.filterProductsByCategory(this.props.products, category.name);
+    this.props.filterProductsByCategory(
+        this.props.products, category.name);
   }
 
   render() {
@@ -59,7 +59,8 @@ class NavCategory extends Component {
           <ul className="navbar-list">
           {
             this.props.categories.map((category, index) => (
-            <li key={index} className="navbar-items" onClick={this.categoryClickEvent(category)}>
+            <li key={index} className="navbar-items" 
+              onClick={this.categoryClickEvent(category)}>
               <Link to={`/`} className="navbar-link">
                 {category.name}
               </Link>

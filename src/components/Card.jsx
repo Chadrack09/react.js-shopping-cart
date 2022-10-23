@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Logo from "../assets/svg/CartIconLight.svg";
 import { filterProductsByCategory } from '../redux/actions/FetchProducts';
 import store from '../redux/store';
-import { ADD_TO_CART, FILTER_PRODUCTS_BY_CATEGORY, PRODUCT_DETAILS } from '../redux/types';
+import { ADD_TO_CART, CHANGE_GALEERY_IMG, PRODUCT_DETAILS } from '../redux/types';
 
 class Card extends Component {
 
@@ -52,6 +52,11 @@ class Card extends Component {
       type: PRODUCT_DETAILS,
       payload: item
     });
+
+    store.dispatch({
+      type: CHANGE_GALEERY_IMG,
+      payload: item.gallery[0]
+    });
   }
 
   render() {
@@ -65,7 +70,7 @@ class Card extends Component {
               <span className={ !item.inStock ? "stock-state" : "" }>
                 { item.inStock ? "" : (<p className="stock-text">out of stock</p>) }</span>
               <div className="card-image">
-                <Link to={`/details/${item.id}`} /*onClick={this.itemDetailsEvent([item])} */ >
+                <Link to={`/${item.brand}${item.name}/${item.id}`} /*onClick={this.itemDetailsEvent([item])} */ >
                   <img
                     className="card-image-item"
                     src={item.gallery[0]}
@@ -73,14 +78,13 @@ class Card extends Component {
                     onClick={this.itemClickEvent(item)} />
                 </Link>
               </div>
-                { item.attributes.length > 0 ? null :
-                (<div className="break">
-                    <div className="logo-add-to-cart" onClick={this.addToCartClickEvent(item)} >
-                      <img className={`logo-light`} src={Logo} alt="item" />
-                    </div>
-                  </div>)}
+                <div className="break">
+                  <div className="logo-add-to-cart" onClick={this.addToCartClickEvent(item)} >
+                    <img className={`logo-light`} src={Logo} alt="item" />
+                  </div>
+                </div>
               <div className="card-text" style={{ fontSize: "18px" }}>
-                <div className="card-title">{item.name}</div>
+                <div className="card-title">{`${item.brand} ${item.name}`}</div>
                 <div className="card-price" style={{ fontWeight: "500" }}>
                   {
                       this.state.currency.symbol === null 
@@ -105,7 +109,7 @@ const mapStateToProps = state => ({
   productsFiltered: state.productsFiltered.products,
   category: state.categorySelected,
   currency: state.currencySelected,
-  productsFiltered: state.productsFiltered.products
+  productDetails: state.productDetails,
 });
 
 const mapDispatchToProps = (dispatch) => {
