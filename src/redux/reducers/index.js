@@ -6,6 +6,7 @@ import {
   currencySelectedReducer,
 } from "./CurrenciesReducer";
 import {
+  changeGalleryImageReducer,
   filteredProductsReducer,
   productDetailsReducer,
   productsReducer,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   currencies: currenciesReducer,
   currencySelected: currencySelectedReducer,
   cart: addToCartReducer,
+  imageChange: changeGalleryImageReducer,
 });
 
 export default rootReducer;
