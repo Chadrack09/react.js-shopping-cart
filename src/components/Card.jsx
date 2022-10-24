@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Logo from "../assets/svg/CartIconLight.svg";
 import { filterProductsByCategory } from '../redux/actions/FetchProducts';
 import store from '../redux/store';
-import { ADD_TO_CART, CHANGE_GALEERY_IMG, PRODUCT_DETAILS } from '../redux/types';
+import { ADD_TO_CART, CHANGE_GALLERY_IMG, PRODUCT_DETAILS } from '../redux/types';
 
 class Card extends Component {
 
@@ -54,7 +54,7 @@ class Card extends Component {
     });
 
     store.dispatch({
-      type: CHANGE_GALEERY_IMG,
+      type: CHANGE_GALLERY_IMG,
       payload: item.gallery[0]
     });
   }
