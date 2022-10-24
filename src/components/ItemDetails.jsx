@@ -71,8 +71,8 @@ class ItemDetails extends Component {
         attribute: attr,
         id: e.target.id
       }
-    })
 
+    })
 
     // const cartItem = this.props.cartItems.find(item => item.id === product.id);
     
@@ -362,7 +362,7 @@ class ItemDetails extends Component {
                                               id={property.id}
                                               value={property.value}
                                               style={{display: "none"}} 
-                                              onChange={this.radioChangeEvent(this.props.product, attr)} />
+                                              onChange={this.radioChangeEvent(this.props.productDetails, attr)} />
                                     <label htmlFor={property.id}>
                                     <div className={attr.type === 'swatch' ? 'item-properties-swatch' : 'item-property-txt'} 
                                           style={ property.checked && attr.type === 'text' 
