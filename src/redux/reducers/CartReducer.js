@@ -1,7 +1,5 @@
-import store from "../store";
 import {
   ADD_TO_CART,
-  ADD_TO_CART_WITH_ATTRIBUTES,
   REMOVE_FROM_CART,
 } from "../types";
 
@@ -13,76 +11,39 @@ const initialState = {
 export const addToCartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_CART: {
+
       let product = action.payload;
-      let inCart = false;
-      // let ItemSame = state.cartItems.filter((itm) => itm.name === product.name);
+      let attrSelected = product.attributes.map((attr) =>
+        attr.items.find((item) => item.checked === true));
 
-      state.cartItems.forEach((cartItem) => {
-        if (cartItem.id === product.id) {
-          inCart = true;
-        }
-      });
 
-      // if(state.cartItems.length > 0 && ItemSame !== undefined && inCart === true){
+      if(state.cartItems.some(item => item.id === product.id &&
+        item.attrSelected.every((attr, i) => attr.value === attrSelected[i].value))) {
         
-      //   console.log("Condition Satisfied", ItemSame);
-
-      //   let filtered = [];
-
-      //   ItemSame.map((item) => {
-      //     item.attributes.map((attr) => {
-      //       filtered.push(attr.items.find((itm) => itm.checked === true));
-      //     });
-      //   });
-      //   console.log("filtered", filtered);
-        
-      // }
-      
-      return {
-        ...state,
-        cartItems: inCart // is false
-          ? state.cartItems.map((cartItem) =>
-              cartItem.id === product.id
-                ? {
-                    ...cartItem,
-                    qty: cartItem.qty + 1,
-                  }
-                : cartItem
-            )
-          : [
-            ...state.cartItems, 
-            { 
-              ...product, 
-              attrSelected: product.attributes.map((attr) => 
-                attr.items.find((itm) => itm.checked === true)),
+        return {
+          ...state,
+          cartItems: state.cartItems.map((item) =>
+            item.id === product.id &&
+            item.attrSelected.every((attr, i) => attr.value === attrSelected[i].value)
+              ? { ...item, qty: item.qty + 1 }
+              : item
+          ),
+          totalQty: state.totalQty + 1,
+        };
+      } 
+      else {
+        return {
+          ...state,
+          cartItems: [
+            ...state.cartItems,
+            {
+              ...product,
               qty: 1,
-          }], // inCart is true
-
-        totalQty: state.cartItems.reduce((acc, item) => acc + item.qty, 1),
-      };
-      
-      // return {
-      //   ...state,
-      //   cartItems: inCart
-      //     ? state.cartItems.map((cartItem) =>
-      //         cartItem.id === item.id
-      //           ? {
-      //               ...cartItem,
-      //               qty: cartItem.qty + 1,
-      //             }
-      //           : cartItem
-      //       )
-      //     : [...state.cartItems, { ...item, qty: 1 }],
-
-      //   totalQty: state.cartItems.reduce((acc, item) => acc + item.qty, 1),
-      // };
-    }
-
-    case ADD_TO_CART_WITH_ATTRIBUTES: {
-      let item = action.payload;
-
-      return {
-        ...state,
+              attrSelected: attrSelected,
+            },
+          ],
+          totalQty: state.totalQty + 1,
+        };
       }
     }
 

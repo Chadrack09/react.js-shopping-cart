@@ -31,19 +31,16 @@ export const productDetailsReducer = (state = {}, action) => {
     case PRODUCT_DETAILS: {
       return {
         ...action.payload,
-        // attributeSelected: action.payload.attributes.map((attr) => 
-        //       attr.items.find( item => item.checked === true)),
+        attrSelected: action.payload.attributes.map((attr) => 
+              attr.items.find( item => item.checked === true)),
       };
     }
     
     case UPDATE_ATTRIBUTES: {
-      const product = action.payload.product;
-
-      console.log("Product Payload: ", product);
+      let product = action.payload.product;
 
       return {
         ...product,
-        // attributes: action.payload.product.attributes.map((attribute) =>
         attributes: state.attributes.map((attribute) =>
           attribute.name === action.payload.attribute.name
             ? {
@@ -58,7 +55,8 @@ export const productDetailsReducer = (state = {}, action) => {
               }
             : attribute
         ),
-        // attributeSelected: action.payload.attributeSelected,
+        attrSelected: state.attributes.map((attr) =>
+        attr.items.find((itm) => itm.checked === true)),
       };
     }
 

@@ -10,9 +10,6 @@ export const FILTER_PRODUCTS_BY_CATEGORY = "FILTER_PRODUCTS_BY_CATEGORY";
 /** @description this action adds new item to cart and increase qty */
 export const ADD_TO_CART = "ADD_TO_CART";
 
-/** @description this action adds new item to cart with updated attributes */
-export const ADD_TO_CART_WITH_ATTRIBUTES = "ADD_TO_CART_WITH_ATTRIBUTES";
-
 export const UPDATE_ATTRIBUTES = "UPDATE_ATTRIBUTES";
 export const CHANGE_GALEERY_IMG = "CHANGE_GALEERY_IMG";
 
