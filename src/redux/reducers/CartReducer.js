@@ -18,13 +18,15 @@ export const addToCartReducer = (state = initialState, action) => {
 
 
       if(state.cartItems.some(item => item.id === product.id &&
-        item.attrSelected.every((attr, i) => attr.value === attrSelected[i].value))) {
+        item.attrSelected.every((attr, i) => 
+        attr.value === attrSelected[i].value))) {
         
         return {
           ...state,
           cartItems: state.cartItems.map((item) =>
             item.id === product.id &&
-            item.attrSelected.every((attr, i) => attr.value === attrSelected[i].value)
+            item.attrSelected.every((attr, i) => 
+            attr.value === attrSelected[i].value)
               ? { ...item, qty: item.qty + 1 }
               : item
           ),
@@ -48,11 +50,12 @@ export const addToCartReducer = (state = initialState, action) => {
     }
 
     case REMOVE_FROM_CART: {
-      let item = action.payload;
 
+      let item = action.payload;
       let itemToRemove = state.cartItems.find(
-        (cartItem) => cartItem.id === item.id
-      );
+        (cartItem) => cartItem.id === item.id &&
+        cartItem.attrSelected.every((attr, i) => 
+        attr.value === item.attrSelected[i].value));
 
       let newState = {};
 
@@ -60,15 +63,19 @@ export const addToCartReducer = (state = initialState, action) => {
         return (newState = {
           ...state,
           cartItems: state.cartItems.filter(
-            (cartItem) => cartItem.id !== item.id
-          ),
+            (cartItem) => cartItem.id !== item.id ||
+            !cartItem.attrSelected.every((attr, i) => 
+            attr.value === item.attrSelected[i].value)),
           totalQty: state.totalQty - 1,
         });
-      } else {
+      } 
+      else {
         return (newState = {
           ...state,
           cartItems: state.cartItems.map((cartItem) =>
-            cartItem.id === item.id
+            cartItem.id === item.id &&
+            cartItem.attrSelected.every((attr, i) => 
+            attr.value === item.attrSelected[i].value)
               ? { ...cartItem, qty: cartItem.qty - 1 }
               : cartItem
           ),
