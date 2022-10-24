@@ -11,7 +11,7 @@ export const FILTER_PRODUCTS_BY_CATEGORY = "FILTER_PRODUCTS_BY_CATEGORY";
 export const ADD_TO_CART = "ADD_TO_CART";
 
 export const UPDATE_ATTRIBUTES = "UPDATE_ATTRIBUTES";
-export const CHANGE_GALEERY_IMG = "CHANGE_GALEERY_IMG";
+export const CHANGE_GALLERY_IMG = "CHANGE_GALEERY_IMG";
 
 /** @description this action decreases item qty and remove when qty is 0 */
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";

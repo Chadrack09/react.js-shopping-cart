@@ -1,5 +1,5 @@
 import {
-  CHANGE_GALEERY_IMG,
+  CHANGE_GALLERY_IMG,
   FETCH_PRODUCTS,
   FILTER_PRODUCTS_BY_CATEGORY,
   PRODUCT_DETAILS,
@@ -67,7 +67,7 @@ export const productDetailsReducer = (state = {}, action) => {
 
 export const changeGalleryImageReducer = (state = {}, action) => {
   switch (action.type) {
-    case CHANGE_GALEERY_IMG: {
+    case CHANGE_GALLERY_IMG: {
       return action.payload;
     }
 
