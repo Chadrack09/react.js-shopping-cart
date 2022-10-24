@@ -1,7 +1,5 @@
-import store from "../store";
 import {
   ADD_TO_CART,
-  ADD_TO_CART_WITH_ATTRIBUTES,
   REMOVE_FROM_CART,
 } from "../types";
 
@@ -13,53 +11,98 @@ const initialState = {
 export const addToCartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_CART: {
+
       let product = action.payload;
-      let inCart = false;
-      // let ItemSame = state.cartItems.filter((itm) => itm.name === product.name);
+      let attrSelected = product.attributes.map((attr) =>
+        attr.items.find((item) => item.checked === true))
 
-      state.cartItems.forEach((cartItem) => {
-        if (cartItem.id === product.id) {
-          inCart = true;
-        }
-      });
-
-      // if(state.cartItems.length > 0 && ItemSame !== undefined && inCart === true){
-        
-      //   console.log("Condition Satisfied", ItemSame);
-
-      //   let filtered = [];
-
-      //   ItemSame.map((item) => {
-      //     item.attributes.map((attr) => {
-      //       filtered.push(attr.items.find((itm) => itm.checked === true));
-      //     });
-      //   });
-      //   console.log("filtered", filtered);
-        
-      // }
+      // let inCart = false;
       
-      return {
-        ...state,
-        cartItems: inCart // is false
-          ? state.cartItems.map((cartItem) =>
-              cartItem.id === product.id
-                ? {
-                    ...cartItem,
-                    qty: cartItem.qty + 1,
-                  }
-                : cartItem
-            )
-          : [
-            ...state.cartItems, 
-            { 
-              ...product, 
-              attrSelected: product.attributes.map((attr) => 
-                attr.items.find((itm) => itm.checked === true)),
-              qty: 1,
-          }], // inCart is true
+      // state.cartItems.forEach((cartItem) => {
+      //   // if (cartItem.id === product.id) {
+      //   if (cartItem.id === product.id) {
+      //     inCart = true;
+      //   }
+      // });
 
-        totalQty: state.cartItems.reduce((acc, item) => acc + item.qty, 1),
-      };
+      if(state.cartItems.some(item => item.id === product.id &&
+        item.attrSelected.every((attr, i) => attr.value === attrSelected[i].value))) {
+        
+        return {
+          ...state,
+          cartItems: state.cartItems.map((item) =>
+            item.id === product.id &&
+            item.attrSelected.every((attr, i) => attr.value === attrSelected[i].value)
+              ? { ...item, qty: item.qty + 1 }
+              : item
+          ),
+          totalQty: state.totalQty + 1,
+        };
+      } else {
+        return {
+          ...state,
+          cartItems: [
+            ...state.cartItems,
+            {
+              ...product,
+              qty: 1,
+              attrSelected: attrSelected,
+            },
+          ],
+          totalQty: state.totalQty + 1,
+        };
+      }
+      
+      // return {
+      //   ...state,
+      //   cartItems: inCart // is true
+      //     ? state.cartItems.map((cartItem) =>
+      //         // check if attrSelected is equal to cartAttrSelected
+      //         // attrSelected.length === cartAttrSelected.length &&
+      //         attrSelected.every((attr, i) => attr.id === cartAttrSelected[i].id)
+      //           ? { ...cartItem, qty: cartItem.qty + 1 }
+      //           : // 
+      //           // : [...state.cartItems, { ...product, qty: 1 }]
+      //       )
+          
+      //     : [
+      //       ...state.cartItems, 
+      //       { 
+      //         ...product, 
+      //         attrSelected: product.attributes.map((attr) => 
+      //           attr.items.find((itm) => itm.checked === true)),
+      //         qty: 1,
+      //     }], // inCart is false
+
+      //   totalQty: state.cartItems.reduce((acc, item) => acc + item.qty, 1),
+
+      // return { // good one
+      //   ...state,
+      //   cartItems: inCart // is false
+      //     ? state.cartItems.map((cartItem) =>
+      //         cartItem.id === product.id
+      //           ? {
+      //               ...cartItem,
+      //               attrSelected: // compare cartItem.attrSelected with attrSelected
+      //                 cartItem.attrSelected === attrSelected
+      //                   ? cartItem.attrSelected
+      //                   : attrSelected,
+                        
+      //               qty: cartItem.qty + 1,
+      //             }
+      //           : cartItem
+      //       )
+      //     : [
+      //       ...state.cartItems, 
+      //       { 
+      //         ...product, 
+      //         attrSelected: product.attributes.map((attr) => 
+      //           attr.items.find((itm) => itm.checked === true)),
+      //         qty: 1,
+      //     }], // inCart is true
+
+      //   totalQty: state.cartItems.reduce((acc, item) => acc + item.qty, 1),
+      // };
       
       // return {
       //   ...state,
@@ -76,14 +119,6 @@ export const addToCartReducer = (state = initialState, action) => {
 
       //   totalQty: state.cartItems.reduce((acc, item) => acc + item.qty, 1),
       // };
-    }
-
-    case ADD_TO_CART_WITH_ATTRIBUTES: {
-      let item = action.payload;
-
-      return {
-        ...state,
-      }
     }
 
     case REMOVE_FROM_CART: {
