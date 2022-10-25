@@ -223,6 +223,7 @@
   background-color: rgb(122, 66, 218);
   padding: 26px 12px;
   box-sizing: border-box;
+  margin-right: 72px;
 }
 
 .modal-content {
@@ -271,14 +272,14 @@
   display: flex;
 }
 
-.item-property > input {
+/* .item-property > input {
   border: none;
   display: none;
-}
-.item-property-text {
+} */
+/* .item-property-text {
   min-width: 24px;
   height: 24px;
-  /* background-color: #6af5af; */
+  background-color: #6af5af;
   border: 1px solid black;
   margin-right: 12px;
   padding: .3rem;
@@ -291,9 +292,9 @@
 .item-property-swatch {
   width: 16px;
   height: 16px;
-  /* border: 1px solid black; */
+  border: 1px solid black;
   margin-right: 12px;
-}
+} */
 
 /* .props-names {
   display: flex;
