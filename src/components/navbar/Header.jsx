@@ -7,11 +7,11 @@ import CartIcon from "../../assets/svg/CartIconDark.svg";
 import { CurrencyContainer, CurrencyHeader, 
   CurrencySymbol, CustomArrow, ListContainer, 
   ListItem, ListItemContainer, ListItemSymbol, 
-  ListItemText } from "./ListStyles";
+  ListItemText } from "../styles/List.styled";
 import { connect } from "react-redux";
 import { CURRENCY_SELECTED } from "../../redux/types";
 import store from "../../redux/store";
-import { CartContainer, CartCounter, CartLogo } from "./CartStyles";
+import { CartContainer, CartCounter, CartLogo } from "../styles/Cart.styled";
 import Modal from "./Modal";
 
 class Header extends Component {
