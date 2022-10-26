@@ -7,8 +7,11 @@
   margin-bottom: 55px;
 }
 
-.cart-item-config {
-  width: 335px;
-  height: 100%;
-  background-color: rgb(253, 163, 163);
+.cart-container > :last-child {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.cart-footer-info {
+  margin-top: 32px;
+  margin-bottom: 500px;
 }
