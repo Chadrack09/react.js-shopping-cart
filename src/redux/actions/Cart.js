@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_FROM_CART, UPDATE_ATTRIBUTES } from "../types";
+import { ADD_TO_CART, REMOVE_FROM_CART, TOTAL_AMOUNT, UPDATE_ATTRIBUTES } from "../types";
 
 export const addToCartAction = (product) => (dispatch) => {
   dispatch({
@@ -21,6 +21,16 @@ export const updateAttributesAction = (product, attr, id) => (dispatch) => {
       product: product,
       attribute: attr,
       id: id,
+    }
+  });
+}
+
+export const totalAmountAction = (totalAmount, tax) => (dispatch) => {
+  dispatch({
+    type: TOTAL_AMOUNT,
+    payload: {
+      totalAmount: totalAmount,
+      tax: tax
     }
   });
 }
