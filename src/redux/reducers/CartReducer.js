@@ -44,7 +44,7 @@ export const addToCartReducer = (state = initialState, action) => {
               attrSelected: attrSelected,
             },
           ],
-          totalQty: state.totalQty + 1,
+          totalQty: state.cartItems.reduce((acc, item) => acc + item.qty, 1),
         };
       }
     }
