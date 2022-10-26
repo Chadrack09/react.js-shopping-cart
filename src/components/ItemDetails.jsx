@@ -14,48 +14,8 @@ class ItemDetails extends Component {
   
   constructor(props) {
     super(props);
-    this.state = {
-      product: {},
-      currency: {},
-      pdtAttributes: {},
-    }
     
     this.setImage = this.setImage.bind(this);
-  }
-
-  static getDerivedStateFromProps(props, state) {
-
-    const { productDetails } = props;
-
-    if(productDetails) {
-      return {
-        pdtAttributes: props.productDetails
-      }
-    }
-
-    // if(props.cartItem.length > 0 && props.cartItem
-    //   .find(item => item.id === props.product.id) !== undefined) {
-    //   return {
-    //     product: props.cartItem.find(item => item.id === props.product.id),
-    //     currency: props.currency
-    //   }
-    // }
-
-    // else if(props.productDetails !== undefined && props.productDetails !== null) {
-    //   return {
-    //     product: props.productDetails,
-    //     currency: props.currency
-    //   }
-    // }
-
-    // else if(props.products !== undefined && props.products !== null) {
-    //   let urlId = window.location.pathname.split('/')[2];
-    //   return {
-    //     product: props.products.find(product => product.id === urlId),
-    //     currency: props.currency
-    //   }
-    // }
-    return null
   }
 
   setImage = (image) => () => {
@@ -106,40 +66,6 @@ class ItemDetails extends Component {
                           aff={"Roboto Condensed"} afs={"18px"}
                           atw={"63px"} ath={"45px"} atfs={"16px"}
                           aswh={"32px"} />
-
-                        // this.props.product.attributes.slice(0, 2).map((attr, index) => 
-                        //   <div className="item-attributes-container" key={index}>
-                        //     <div className="item-attributes-name">
-                        //       <span>{attr.name}</span>
-                        //     </div>
-                        //     <div className="item-attributes-values">
-                        //       {
-                        //         attr.items.map((property, index) => (
-                        //           <div className={attr.type === 'swatch' ? 'attr-swatch-val' : 'attr-value'} key={index}>
-                        //             <input type="radio" name={attr.name} 
-                        //                       id={property.id}
-                        //                       value={property.value}
-                        //                       style={{display: "none"}} 
-                        //                       onChange={this.radioChangeEvent(this.props.productDetails, attr)} />
-                        //             <label htmlFor={property.id}>
-                        //             <div className={attr.type === 'swatch' ? 'item-properties-swatch' : 'item-property-txt'} 
-                        //                   style={ property.checked && attr.type === 'text' 
-                        //                   ? {backgroundColor: "red", color: "#fff"} 
-                        //                   : property.checked && attr.type === 'swatch' 
-                        //                   ? {outline: "2px solid black", 
-                        //                     outlineOffset: "1px", 
-                        //                     outlineColor: "rgba(94, 206, 123, 1)",
-                        //                     backgroundColor: property.value} : attr.type === 'swatch' 
-                        //                     ? {backgroundColor: property.value} : null}>
-                        //               <span>{attr.type === 'swatch' ? (null) : (property.value)}</span>
-                        //             </div>
-                        //             </label>
-                        //           </div>
-                        //         ))
-                        //       }
-                        //     </div>
-                        //   </div>
-                        // )
                       ) : null
                     }
                     <div className='item-detail-price'>
@@ -159,9 +85,9 @@ class ItemDetails extends Component {
                       bgColor={"#5eCe7b"} color={"#fff"} 
                       border={"none"} fontWeight={"600"}
                       width={"100%"} height={"52px"} 
-                      onClick={this.addToCart} ></Button>
+                      onClick={this.addToCart} />
                     <div className="item-detail-description" 
-                    dangerouslySetInnerHTML={{__html: this.props.product.description}} ></div>
+                      dangerouslySetInnerHTML={{__html: this.props.product.description}}></div>
                   </div>
                 </div>
               </div>
