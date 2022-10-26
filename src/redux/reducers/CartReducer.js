@@ -1,11 +1,14 @@
 import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
+  TOTAL_AMOUNT,
 } from "../types";
 
 const initialState = {
   cartItems: [],
   totalQty: 0,
+  totalAmount: 0,
+  tax: 0,
 };
 
 export const addToCartReducer = (state = initialState, action) => {
@@ -81,6 +84,15 @@ export const addToCartReducer = (state = initialState, action) => {
           ),
           totalQty: state.totalQty - 1,
         });
+      }
+    }
+
+    case TOTAL_AMOUNT: {
+      console.log("TOTAL_AMOUNT", action.payload);
+      return {
+        ...state,
+        totalAmount: action.payload.totalAmount,
+        tax: action.payload.tax,
       }
     }
 
