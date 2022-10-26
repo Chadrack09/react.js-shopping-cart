@@ -17,3 +17,6 @@ export const CHANGE_GALLERY_IMG = "CHANGE_GALEERY_IMG";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 
 export const PRODUCT_DETAILS = "PRODUCT_DETAILS";
+
+/** @description this action set total amount of all item in the cart and tax value */
+export const TOTAL_AMOUNT = "TOTAL_AMOUNT";
