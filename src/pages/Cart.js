@@ -10,14 +10,20 @@ class Cart extends Component {
         <div className="cart-container">
 
           {/* Custom styled reusable component used in minicart and cart page */}
-          <CartItems bfs={"30px"} bfw={"600"} bmb={"16px"} 
+          <CartItems 
+              cibt={"1px solid #e5e5e5"}
+              cibb={"1px solid #e5e5e5"}
+              bfs={"30px"} bfw={"600"} bmb={"16px"} 
               ifs={"30px"} ifw={"400"} imb={"20px"}
               pfs={"24px"} pfw={"700"} 
               aff={"Roboto Condensed"} afs={"18px"}
               atw={"63px"} ath={"45px"} atfs={"16px"} 
               aswh={"32px"} 
               cqwh={"45px"} 
-              ciw={"200px"} cih={"288px"} />
+              ciw={"200px"} cih={"288px"} imr={"24px"} />
+        </div>
+        <div className='cart-footer-info'>
+          
         </div>
       </div>
     )
