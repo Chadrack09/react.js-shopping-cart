@@ -25,7 +25,7 @@ class ProductList extends Component {
 
   render() {
     return (
-      <div className="c-container" style={{ backgroundColor: "#eee" }}>
+      <div className="c-container">
         <div className="category-title">{this.state.category.name}</div>
         <div className="line-break"></div>
         <div className="card-container">
