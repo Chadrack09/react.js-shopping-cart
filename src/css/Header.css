@@ -223,6 +223,7 @@
 }
 
 .modal-container {
+  width: 325px;
   height: 500px;
   background-color: #ffffff;
   padding: 26px 8px;

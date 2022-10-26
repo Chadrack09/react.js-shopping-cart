@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { totalAmountAction } from '../../redux/actions/Cart';
 import Button from '../Button';
 import CartItems from '../CartItems';
 
@@ -10,14 +11,30 @@ class Modal extends Component {
     super(props);
     this.state = {
       symbol: "₹",
-      currency: {},
     }
   }
 
-  static getDerivedStateFromProps(props, state) {
-    return {
-      currency: props.currency[0],
-    };
+  componentDidMount() {
+    const totalAmount = this.props.cartItems.reduce((acc, item) =>
+      acc + (item.prices.filter(price => 
+      price.currency.symbol === this.props.currency.symbol)[0].amount * item.qty), 0)
+
+    const tax = totalAmount * 0.21;
+
+    this.props.totalAmountAction(totalAmount, tax);
+  }
+  
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.cartItems !== this.props.cartItems) {
+      
+      const totalAmount = this.props.cartItems.reduce((acc, item) =>
+        acc + (item.prices.filter(price => 
+        price.currency.symbol === this.props.currency.symbol)[0].amount * item.qty), 0)
+      
+        const tax = totalAmount * 0.21;
+
+      this.props.totalAmountAction(totalAmount, tax);
+    }
   }
 
   componentDidCatch(error, info) {
@@ -63,17 +80,8 @@ class Modal extends Component {
                     <span>Total</span>
                   </div>
                   <div>
-                    <span>{this.state.currency.symbol}{` `}</span>
-                    <span>
-                      {
-                        this.props.cartItems.length > 0 ? 
-                        (
-                        this.props.cartItems.reduce((acc, item) =>
-                          acc + (item.prices.filter(price => 
-                            price.currency.symbol === this.state.currency.symbol)[0].amount * item.qty), 0).toFixed(2) 
-                        ) : 0
-                      }
-                    </span>
+                    <span>{this.props.currency.symbol}{` `}</span>
+                    <span>{(this.props.totalAmount).toFixed(2)}</span>
                   </div>    
                 </div>
                 <div className="footer-btn">
@@ -100,8 +108,13 @@ class Modal extends Component {
 
 const mapStateToProps = state => ({
   cartItems: state.cart.cartItems,
-  currency: state.currencySelected,
+  currency: state.currencySelected[0],
   totalQty: state.cart.totalQty,
+  totalAmount: state.cart.totalAmount,
 })
 
-export default connect(mapStateToProps)(Modal);
+const mapDispatchToProps = dispatch => ({
+  totalAmountAction: (totalAmount, tax) => dispatch(totalAmountAction(totalAmount, tax)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Modal);

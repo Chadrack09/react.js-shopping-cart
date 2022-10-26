@@ -13,5 +13,21 @@
 
 .cart-footer-info {
   margin-top: 32px;
-  margin-bottom: 500px;
+  margin-bottom: 274px;
+}
+.cart-order-info {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+.cart-order-info > :last-child {
+  margin-bottom: 16px;
+}
+.cart-order-info-title {
+  margin-right: 8px;
+  margin-bottom: 8px;
+  font-size: 24px;
+}
+.cart-order-info-value {
+  font-weight: 700;
+  font-size: 24px;
 }

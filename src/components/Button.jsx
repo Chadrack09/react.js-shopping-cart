@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { addToCartAction } from '../redux/actions/Cart';
-import store from '../redux/store';
-import { ADD_TO_CART } from '../redux/types';
 import { ItemButton } from './styles/Button.styled'
 
 class Button extends Component {
