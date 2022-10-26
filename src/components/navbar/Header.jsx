@@ -13,6 +13,7 @@ import { CURRENCY_SELECTED } from "../../redux/types";
 import store from "../../redux/store";
 import { CartContainer, CartCounter, CartLogo } from "../styles/Cart.styled";
 import Modal from "./Modal";
+import { totalAmountAction } from "../../redux/actions/Cart";
 
 class Header extends Component {
 
@@ -74,6 +75,14 @@ class Header extends Component {
       type: CURRENCY_SELECTED,
       payload: currency,
     });
+
+    const totalAmount = this.props.cartItems.reduce((acc, item) =>
+      acc + (item.prices.filter(price => 
+      price.currency.symbol === currency.symbol)[0].amount * item.qty), 0)
+  
+    const tax = totalAmount * 0.21;
+    
+    this.props.totalAmountAction(totalAmount, tax);
   }
 
   cartIconEvent = () => {
@@ -163,6 +172,7 @@ class Header extends Component {
 const mapStateToProps = (state) => {
   return {
     products: state.products,
+    cartItems: state.cart.cartItems,
     categories: state.categories,
     category: state.category,
     currencies: state.currencies,
@@ -171,4 +181,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = dispatch => ({
+  totalAmountAction: (totalAmount, tax) => dispatch(totalAmountAction(totalAmount, tax)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
