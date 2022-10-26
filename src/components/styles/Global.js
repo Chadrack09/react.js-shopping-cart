@@ -75,21 +75,4 @@ export const Global = createGlobalStyle`
   }
 
 
-  /* Custom Scrollbar */
-
-  ::-webkit-scrollbar {
-    width: .6rem;
-    height: .6rem;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 100vw;
-    margin-block: .4rem;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 100vw;
-  }
 `;
