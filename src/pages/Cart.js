@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import Button from '../components/Button';
 import CartItems from '../components/CartItems';
 import '../css/Cart.css'
 
 class Cart extends Component {
+  
   render() {
     return (
       <div className="c-container cart-main-container">
@@ -23,11 +26,35 @@ class Cart extends Component {
               ciw={"200px"} cih={"288px"} imr={"24px"} />
         </div>
         <div className='cart-footer-info'>
-          
+          <div className='cart-order-info'>
+            <div className='cart-order-info-title'>Tax 21%:</div>
+            <div className='cart-order-info-value'>
+              {this.props.currency.symbol}{(this.props.tax).toFixed(2)}</div>
+            <div className='cart-order-info-title'>Quantity:</div>
+            <div className='cart-order-info-value'>{this.props.totalQty}</div>
+            <div className='cart-order-info-title'>Total:</div>
+            <div className='cart-order-info-value'>
+              {this.props.currency.symbol}{(this.props.totalAmount).toFixed(2)}</div>
+          </div>
+          <Button
+            text="Order" fontSize={"14px"}
+            bgColor={"#5eCe7b"} color={"#fff"} 
+            border={"none"} fontWeight={"600"}
+            width={"279px"} height={"43px"} />
         </div>
       </div>
     )
   }
 }
 
-export default Cart;
+const mapStateToProps = (state) => {
+  return {
+    currency: state.currencySelected[0],
+    cartItems: state.cartItems,
+    totalQty: state.cart.totalQty,
+    totalAmount: state.cart.totalAmount,
+    tax: state.cart.tax,
+  }
+}
+
+export default connect(mapStateToProps)(Cart);
