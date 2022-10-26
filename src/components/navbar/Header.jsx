@@ -119,7 +119,7 @@ class Header extends Component {
                     {this.state.symbol}
                   </CurrencySymbol>
                   <CustomArrow>
-                    <img src={Arrow} style={this.state.isOpen ? 
+                    <img src={Arrow} className={"__img_cart_logo"} style={this.state.isOpen ? 
                       { transform: "rotate(180deg)" } : { transform: "rotate(0deg)" }} alt="Arrow" />
                   </CustomArrow>
                 </CurrencyHeader>
