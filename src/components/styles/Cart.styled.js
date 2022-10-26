@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const CartContainer = styled.div`
-  background-color: rgb(199, 228, 55);
   position: relative;
   cursor: pointer;
 `;
@@ -57,6 +56,8 @@ export const CartModalContent = styled.div`
  * 4. Props are passed from Cart.js and Modal.jsx
  * 5. Props are used in CartItems.js
  * 
+ * @property {string} cibt - cart item border top
+ * @property {string} cibb - cart item border bottom
  * @property {string} bfs - brand font size
  * @property {string} bfw - brand font weight
  * @property {string} bmb - brand margin bottom
@@ -80,14 +81,12 @@ export const CartItem = styled.div`
   height: auto;
   display: flex;
   justify-content: space-between;
-  background-color: rgb(157, 248, 216);
   padding: 24px 0;
+  border-top: ${props => props.cibt ? props.cibt : 0};
 `;
 
 export const CartItemDetails = styled.div`
-  min-width: 335px;
   height: inherit;
-  background-color: rgb(253, 163, 163);
 `;
 
 export const CartItemBrand = styled.div`
@@ -132,6 +131,8 @@ export const CartAttrProps = styled.div`
 
 export const CartAttrTypes = styled.div`
 
+  cursor: ${props => props.cursor};
+
   &.item-property-swatch {
     width: ${props => props.aswh};
     height: ${props => props.aswh};
@@ -168,14 +169,13 @@ export const CartAttrTypes = styled.div`
 
 export const CartItemImg = styled.div`
   height: ${props => props.cih};
-  background-color: rgb(253, 163, 163);
   display: flex;
   justify-content: flex-end;
 `;
 
 export const CartItemQty = styled.div`
   width: ${props => props.cqwh};
-  margin-right: 24px;
+  margin-right: ${props => props.imr};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
