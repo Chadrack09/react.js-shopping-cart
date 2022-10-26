@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const CurrencyContainer = styled.div`
-  background-color: green;
   height: inherit;
   margin-right: 22px;
   position: relative;
@@ -14,7 +13,6 @@ export const CurrencyContainer = styled.div`
 export const CurrencyHeader = styled.div`
   width: 38px;
   height: inherit;
-  background-color: rgb(126, 155, 240);
   border: none;
   outline: none;
   display: flex;
@@ -30,8 +28,7 @@ export const CustomArrow = styled.div``;
 export const ListContainer = styled.div`
   position: absolute;
   top: 48px;
-  left: 0;
-  background-color: chocolate;
+  right: 0;
   width: 114px;
   height: auto;
   text-align: center;
@@ -47,7 +44,6 @@ export const ListItemContainer = styled.div`
 `;
 export const ListItem = styled.div`
   &:nth-child(odd) {
-    background-color: red;
     padding: 16px 0 16px 0;
   }
   &:nth-child(even) {
