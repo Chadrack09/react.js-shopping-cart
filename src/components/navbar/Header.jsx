@@ -9,12 +9,37 @@ import { CurrencyContainer, CurrencyHeader,
   ListItem, ListItemContainer, ListItemSymbol, 
   ListItemText } from "../styles/List.styled";
 import { connect } from "react-redux";
-import { CURRENCY_SELECTED } from "../../redux/types";
 import store from "../../redux/store";
 import { CartContainer, CartCounter, CartLogo } from "../styles/Cart.styled";
 import Modal from "./Modal";
 import { totalAmountAction } from "../../redux/actions/Cart";
+import { setCurrencyAction } from "../../redux/actions/FetchCurrencies";
 
+/**
+ * @description Header component used in the app,
+ * displays the logo, categories, cart and currency
+ * 
+ * 
+ * @param {object} props - props passed from parent component
+ * @param {array} props.cartItems - array of items in the cart
+ * @param {array} props.categories - array of categories
+ * @param {array} props.currencies - array of currencies
+ * @param {object} props.currencySelected - object of selected currency
+ * @param {number} props.totalQty - total quantity of items in the cart
+ * @param {function} props.totalAmountAction - action to set total amount and tax
+ * @param {function} props.setCurrency - action to set currency
+ * 
+ * @returns {JSX.Element} - Header component
+ * 
+ * @see {@link https://reactjs.org/docs/components-and-props.html|React Components and Props}
+ * @see {@link https://reactjs.org/docs/react-component.html|React Component}
+ * @see {@link https://reactjs.org/docs/react-component.html#componentdidmount|React Component componentDidMount}
+ * @see {@link https://reactjs.org/docs/react-component.html#componentdidupdate|React Component componentDidUpdate}
+ * @see {@link https://reactjs.org/docs/react-component.html#componentdidcatch|React Component componentDidCatch}
+ * @see {@link https://reactjs.org/docs/react-component.html#componentwillunmount|React Component componentWillUnmount}
+ * 
+ * @author  Chaadrack Boudzoumou
+ */
 class Header extends Component {
 
   constructor(props) {
@@ -24,7 +49,6 @@ class Header extends Component {
       isOpen: true,
       isModalOpen: false,
       currencySelected: [],
-      products: []
     };
 
     this.currencyListEvent = this.currencyListEvent.bind(this);
@@ -34,11 +58,9 @@ class Header extends Component {
 
   static getDerivedStateFromProps(props, state) {
 
-    if(props.currencySelected.length > 0 && props.products.length > 0) {
+    if(props.currencySelected) {
       return {
-        currencySelected: props.currencySelected,
-        symbol: props.currencySelected[0].symbol,
-        products: props.products
+        symbol: props.currencySelected.symbol,
       }
     }
     return null;
@@ -52,10 +74,7 @@ class Header extends Component {
     if (currency !== undefined) {
       let currencySelected = store.getState().currencySelected;
       if(currencySelected.length === 0) {
-        store.dispatch({
-          type: CURRENCY_SELECTED,
-          payload: currency
-        });
+        this.props.setCurrency(currency);
       }
     }
   }
@@ -71,15 +90,12 @@ class Header extends Component {
 
   selectedOption = (currency) => () => {
     this.setState({ isOpen: true });
-    store.dispatch({
-      type: CURRENCY_SELECTED,
-      payload: currency,
-    });
+
+    this.props.setCurrency(currency);
 
     const totalAmount = this.props.cartItems.reduce((acc, item) =>
       acc + (item.prices.filter(price => 
       price.currency.symbol === currency.symbol)[0].amount * item.qty), 0)
-  
     const tax = totalAmount * 0.21;
     
     this.props.totalAmountAction(totalAmount, tax);
@@ -171,18 +187,17 @@ class Header extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    products: state.products,
     cartItems: state.cart.cartItems,
     categories: state.categories,
-    category: state.category,
     currencies: state.currencies,
-    currencySelected: state.currencySelected,
+    currencySelected: state.currencySelected[0],
     totalQty: state.cart.totalQty,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   totalAmountAction: (totalAmount, tax) => dispatch(totalAmountAction(totalAmount, tax)),
+  setCurrency: (currency) => dispatch(setCurrencyAction(currency)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
