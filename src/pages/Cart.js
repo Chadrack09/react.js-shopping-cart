@@ -14,6 +14,7 @@ class Cart extends Component {
 
           {/* Custom styled reusable component used in minicart and cart page */}
           <CartItems 
+              action={"arrows"}
               cibt={"1px solid #e5e5e5"}
               cibb={"1px solid #e5e5e5"}
               bfs={"30px"} bfw={"600"} bmb={"16px"} 
