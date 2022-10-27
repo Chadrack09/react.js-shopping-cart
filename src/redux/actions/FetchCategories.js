@@ -22,6 +22,6 @@ export const fetchCategoriesActions = () => async (dispatch) => {
 export const setCategoryAction = (category) => (dispatch) => {
   dispatch({
     type: SET_CATEGORY,
-    payload: category,
+    payload: category
   });
 };
