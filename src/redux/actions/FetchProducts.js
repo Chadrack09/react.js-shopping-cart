@@ -1,10 +1,8 @@
 import client from "../../service/Client";
 import {
-  FETCH_ALL_PRODUCTS_QUERY,
-  FETCH_PRODUCTS_QUERY,
+  FETCH_PRODUCTS_QUERY, GET_PRODUCT_BY_ID_QUERY,
 } from "../../service/Queries";
 import {
-  FETCH_ALL_PRODUCTS,
   FETCH_PRODUCTS,
   FILTER_PRODUCTS_BY_CATEGORY,
 } from "../types";
@@ -68,9 +66,7 @@ export const fetchProductsActions = () => async (dispatch) => {
   });
 };
 
-export const filterProductsByCategory = (products, categoryName) => (
-  dispatch
-) => {
+export const filterProductsByCategory = (products, categoryName) => (dispatch) => {
   dispatch({
     type: FILTER_PRODUCTS_BY_CATEGORY,
     payload: {
@@ -82,3 +78,13 @@ export const filterProductsByCategory = (products, categoryName) => (
     },
   });
 };
+
+export async function getchProductById(id) {
+  const { data } = await client.query({
+    query: GET_PRODUCT_BY_ID_QUERY,
+    variables: { 
+      productId: id
+    },
+  });
+  return data.product;
+}
