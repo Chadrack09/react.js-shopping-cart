@@ -210,10 +210,29 @@ export const CartItemQtyVal = styled.div`
 export const CartImg = styled.div`
   width: ${props => props.ciw};
   height: ${props => props.cih};
+  position: relative;
 
   & > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+`;
+
+export const CartImgArrows = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  & > img {
+    cursor: pointer;
+    margin-right: 8px;
+    margin-bottom: 16px;
+  }
+
+  & > img:last-child {
+    margin-right: 16px;
   }
 `;
