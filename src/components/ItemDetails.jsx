@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import '../css/ProductDetails.css';
 import store from "../redux/store";
 import NotFound from '../components/NotFound';
-import { ADD_TO_CART, CHANGE_GALLERY_IMG, UPDATE_ATTRIBUTES, UPDATE_WITH_ATTRIBUTES } from '../redux/types';
+import { CHANGE_GALLERY_IMG } from '../redux/types';
 import Button from './Button';
-import { addToCartAction } from '../redux/actions/Cart';
 import ItemDes from './ItemDes';
 import ItemPrice from './ItemPrice';
 import ItemAttr from './ItemAttr';
@@ -51,7 +50,8 @@ class ItemDetails extends Component {
               <div className="item-detail-cart">
                 <div className="cart-detail-container">
                 <ItemDes
-                  brand={this.props.product.brand} name={this.props.product.name} 
+                  brand={this.props.product.brand} 
+                  name={this.props.product.name} 
                   bfs={"30px"} bfw={"600"} bmb={"16px"} 
                   ifs={"30px"} ifw={"400"} imb={"43px"} />
 
@@ -62,7 +62,8 @@ class ItemDetails extends Component {
                         <ItemAttr
                           action={"change"}
                           cursor={"pointer"}
-                          attributes={this.props.product.attributes} itemName={this.props.product.name}
+                          attributes={this.props.product.attributes} 
+                          itemName={this.props.product.name}
                           aff={"Roboto Condensed"} afs={"18px"}
                           atw={"63px"} ath={"45px"} atfs={"16px"}
                           aswh={"32px"} />
