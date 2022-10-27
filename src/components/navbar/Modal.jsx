@@ -5,6 +5,11 @@ import { totalAmountAction } from '../../redux/actions/Cart';
 import Button from '../Button';
 import CartItems from '../CartItems';
 
+/**
+ * 
+ * @description Modal component to display minicart items, 
+ * total amount and checkout button
+ */
 class Modal extends Component {
 
   constructor(props) {
