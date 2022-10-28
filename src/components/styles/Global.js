@@ -16,23 +16,20 @@ export const Global = createGlobalStyle`
   li {
     list-style-type: none;
   }
-
   a {
     text-decoration: none;
     height: inherit;
     color: black;
   }
-
   a:hover {
     color: black;
   }
-
   code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
   }
 
-
+  /* Custom container for the app */
   .c-container {
     --bs-gutter-x: 1.5rem;
     --bs-gutter-y: 0;
@@ -42,27 +39,23 @@ export const Global = createGlobalStyle`
     margin-right: auto;
     margin-left: auto;
   }
-
+  
   /* Media Queries */
-
   @media (min-width: 576px) {
     .c-container {
         max-width: 672px;
     }
   }
-
   @media (min-width: 768px) {
     .c-container {
         max-width: 872px;
     }
   }
-
   @media (min-width: 992px) {
     .c-container {
         max-width: 990px;
     }
   }
-
   @media (min-width: 1200px) {
     .c-container {
       max-width: 1238px;
@@ -73,6 +66,4 @@ export const Global = createGlobalStyle`
       max-width: 1440px;
     }
   }
-
-
 `;

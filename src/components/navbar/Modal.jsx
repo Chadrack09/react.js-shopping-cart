@@ -119,7 +119,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  totalAmountAction: (totalAmount, tax) => dispatch(totalAmountAction(totalAmount, tax)),
+  totalAmountAction: (totalAmount, tax) => 
+  dispatch(totalAmountAction(totalAmount, tax)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Modal);

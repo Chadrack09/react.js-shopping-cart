@@ -25,7 +25,7 @@ export const filteredProductsReducer = (state = [], action) => {
   }
 };
 
-export const productDetailsReducer = (state = {}, action) => {
+export const productDetailsReducer = (state = [], action) => {
 
   switch (action.type) {
     case PRODUCT_DETAILS: {
@@ -65,7 +65,7 @@ export const productDetailsReducer = (state = {}, action) => {
   }
 };
 
-export const changeGalleryImageReducer = (state = {}, action) => {
+export const changeGalleryImageReducer = (state = "", action) => {
   switch (action.type) {
     case CHANGE_GALLERY_IMG: {
       return action.payload;

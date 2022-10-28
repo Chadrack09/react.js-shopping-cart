@@ -12,19 +12,10 @@ class ImageSlider extends Component {
       currentImageIndex: 0,
     }
 
-    this.next = this.next.bind(this);
     this.previous = this.previous.bind(this);
+    this.next = this.next.bind(this);
   }
 
-  next = () => {
-    const isLastImg = this.state.currentImageIndex === this.props.gallery.length - 1;
-    const newIndex = isLastImg 
-    ? 0 : this.state.currentImageIndex + 1;
-    
-    this.setState({
-      currentImageIndex: newIndex
-    })
-  }
   previous = () => {
     const isFirstImg = this.state.currentImageIndex === 0;
     const newIndex = isFirstImg 
@@ -36,8 +27,18 @@ class ImageSlider extends Component {
     })
   }
 
-  render() {
+  next = () => {
+    const isLastImg = this.state.currentImageIndex 
+                          === this.props.gallery.length - 1;
+    const newIndex = isLastImg 
+    ? 0 : this.state.currentImageIndex + 1;
+    
+    this.setState({
+      currentImageIndex: newIndex
+    })
+  }
 
+  render() {
     return (
       <CartImg ciw={this.props.ciw} cih={this.props.cih}>
         <img src={this.props.gallery[this.state.currentImageIndex]} alt={this.props.name} />

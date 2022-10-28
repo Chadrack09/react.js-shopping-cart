@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const ItemButton = styled.button`
   background-color: ${props => props.bgColor};
   width: ${props => props.width};
