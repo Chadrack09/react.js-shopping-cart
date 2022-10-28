@@ -11,10 +11,10 @@ class ItemAttr extends Component {
     super(props);
   }
 
-  radioChange = (product, attr) => (e) => {
+  radioChange = (product, attr, id) => (e) => {
     console.log(attr);
     console.log(e.target.id);
-    this.props.updateAttributes(product, attr, e.target.id);
+    this.props.updateAttributes(product, attr, id);
   }
 
   render() {
@@ -29,11 +29,12 @@ class ItemAttr extends Component {
               attr.items.map((property, index) => (
                 <CartAttrProps key={index}>
                   <input type="radio" name={`${this.props.itemName}-${attr.name}`} 
-                    id={property.id} value={property.value} 
-                    onChange={this.props.action === 'change' ? this.radioChange(this.props.productDetails, attr) : null }
-                    />
+                    id={property.id} value={property.value} />
                   <label htmlFor={property.id}>
-                    <CartAttrTypes className={attr.type === 'swatch' 
+                    <CartAttrTypes 
+                      onClick={this.props.action === 'change' 
+                      ? this.radioChange(this.props.productDetails, attr, property.id) : null }
+                      className={attr.type === 'swatch' 
                       ? 'item-property-swatch' : 'item-property-text'} 
                       checked={property.checked} type={attr.type} value={property.value}
                       atw={this.props.atw} ath={this.props.ath} atfs={this.props.atfs}
