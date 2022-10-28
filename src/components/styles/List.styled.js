@@ -32,9 +32,9 @@ export const ListContainer = styled.div`
   width: 114px;
   height: auto;
   text-align: center;
-  box-shadow: 2px 3px 20px 7px rgba(150, 148, 148, 0.41);
-  -webkit-box-shadow: 2px 3px 20px 7px rgba(150, 148, 148, 0.41);
-  -moz-box-shadow: 2px 3px 20px 7px rgba(150, 148, 148, 0.41);
+  box-shadow: 0px 4px 35px 0px rgba(168, 172, 176, 0.19);
+  -webkit-box-shadow: 0px 4px 35px 0px rgba(168, 172, 176, 0.19);
+  -moz-box-shadow: 0px 4px 35px 0px rgba(168, 172, 176, 0.19);
 `;
 export const ListItemContainer = styled.div`
   width: inherit;
@@ -47,8 +47,10 @@ export const ListItem = styled.div`
     padding: 16px 0 16px 0;
   }
   &:nth-child(even) {
-    background-color: #eeeeee;
     padding: 9px 0 9px 0;
+  }
+  &:hover {
+    background-color: #eeeeee;
   }
 `;
 export const ListItemText = styled.span``;
