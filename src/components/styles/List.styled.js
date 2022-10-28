@@ -24,7 +24,6 @@ export const CurrencySymbol = styled.div`
   font-weight: 600;
 `;
 export const CustomArrow = styled.div``;
-
 export const ListContainer = styled.div`
   position: absolute;
   top: 48px;

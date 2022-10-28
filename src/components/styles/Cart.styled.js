@@ -84,61 +84,48 @@ export const CartItem = styled.div`
   padding: 24px 0;
   border-top: ${props => props.cibt ? props.cibt : 0};
 `;
-
 export const CartItemDetails = styled.div`
   height: inherit;
 `;
-
 export const CartItemBrand = styled.div`
   font-size: ${props => props.bfs};
   font-weight: ${props => props.bfw};
   margin-bottom: ${props => props.bmb};
 `;
-
 export const CartItemName = styled.div`
   font-size: ${props => props.ifs};
   font-weight: ${props => props.ifw};
   margin-bottom: ${props => props.imb};
 `;
-
 export const CartItemPrice = styled.div`
   font-size: ${props => props.pfs};
   font-weight: ${props => props.pfw};
   margin-bottom: ${props => props.imb};
 `;
-
 export const CartAttributes = styled.div`
   margin-bottom: 1rem;
 `;
-
 export const CartAttrTitle = styled.div`
   font-family: ${props => props.aff};
   font-size: ${props => props.afs};
   margin-bottom: 7px;
 `;
-
 export const CartAttrContent = styled.div`
   display: flex;
 `;
-
 export const CartAttrProps = styled.div`
-
   & > input {
     border: none;
     display: none;
   }
 `;
-
 export const CartAttrTypes = styled.div`
-
   cursor: ${props => props.cursor};
-
   &.item-property-swatch {
     width: ${props => props.aswh};
     height: ${props => props.aswh};
     margin-right: 8px;
   }
-
   &.item-property-text {
     min-width: ${props => props.atw};
     min-height: ${props => props.ath};
@@ -150,33 +137,28 @@ export const CartAttrTypes = styled.div`
     justify-content: center;
     font-family: Source Sans Pro;
   }
-
   ${props => props.type === 'swatch' && `
     background-color: ${props.value};
   `}
-
   ${props => props.checked && props.type === 'swatch' && `
     outline: 2px solid black;
     outline-offset: 1px;
     outline-color: rgba(94, 206, 123, 1);
   `}
-
   ${props => props.checked && props.type === 'text' && `
     color: white;
     background-color: #1D1F22;
   `}
-
   ${props => props.type === 'swatch' && props.value === '#FFFFFF' && `
     border: 1px solid black;
+    box-sizing: border-box;
   `}
 `;
-
 export const CartItemImg = styled.div`
   height: ${props => props.cih};
   display: flex;
   justify-content: flex-end;
 `;
-
 export const CartItemQty = styled.div`
   width: ${props => props.cqwh};
   margin-right: ${props => props.imr};
@@ -194,7 +176,7 @@ export const CartItemQtyInc = styled.div`
   align-items: center;
   cursor: pointer;
   `;
-  export const CartItemQtyDec = styled.div`
+export const CartItemQtyDec = styled.div`
   width: ${props => props.cqwh};
   height: ${props => props.cqwh};
   color: #1D1F22;
@@ -210,32 +192,27 @@ export const CartItemQtyVal = styled.div`
   font-size: ${props => props.pfs};
   font-weight: 500;
 `;
-
 export const CartImg = styled.div`
   width: ${props => props.ciw};
   height: ${props => props.cih};
   position: relative;
-
   & > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 `;
-
 export const CartImgArrows = styled.div`
   display: flex;
   justify-content: flex-end;
   position: absolute;
   bottom: 0;
   right: 0;
-
   & > img {
     cursor: pointer;
     margin-right: 8px;
     margin-bottom: 16px;
   }
-
   & > img:last-child {
     margin-right: 16px;
   }

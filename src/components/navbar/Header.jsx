@@ -52,6 +52,7 @@ class Header extends Component {
     };
 
     this.currencyListEvent = this.currencyListEvent.bind(this);
+    this.closeCurrencyList = this.closeCurrencyList.bind(this);
     this.selectedOption = this.selectedOption.bind(this);
     this.cartIconEvent = this.cartIconEvent.bind(this);
   }
@@ -195,6 +196,7 @@ class Header extends Component {
   }
 }
 
+// Mapping redux state to header component props
 const mapStateToProps = (state) => {
   return {
     cartItems: state.cart.cartItems,

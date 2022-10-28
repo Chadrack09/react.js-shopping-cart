@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Logo from "../assets/svg/CartIconLight.svg";
-import { filterProductsByCategory } from '../redux/actions/FetchProducts';
-import store from '../redux/store';
-import { ADD_TO_CART, CHANGE_GALLERY_IMG, PRODUCT_DETAILS } from '../redux/types';
+import { addToCartAction } from '../redux/actions/Cart';
+import { changeGalleryImgAction, filterProductsByCategory, 
+  productDetailsAction } from '../redux/actions/FetchProducts';
 
 class Card extends Component {
 
@@ -40,22 +40,12 @@ class Card extends Component {
   }
 
   addToCartClickEvent = (product) => () => {
-    store.dispatch({
-      type: ADD_TO_CART,
-      payload: product
-    });
+    this.props.addToCart(product);
   }
 
   itemClickEvent = (item) => () => {
-    store.dispatch({
-      type: PRODUCT_DETAILS,
-      payload: item
-    });
-
-    store.dispatch({
-      type: CHANGE_GALLERY_IMG,
-      payload: item.gallery[0]
-    });
+    this.props.productDetailsAction(item);
+    this.props.changeGalleryImg(item.gallery[0]);
   }
 
   render() {
@@ -69,7 +59,7 @@ class Card extends Component {
               <span className={ !item.inStock ? "stock-state" : "" }>
                 { item.inStock ? "" : (<p className="stock-text">out of stock</p>) }</span>
               <div className="card-image">
-                <Link to={`/${item.brand}${item.name}/${item.id}`} /*onClick={this.itemDetailsEvent([item])} */ >
+                <Link to={`/${item.brand}${item.name}/${item.id}`} >
                   <img
                     className="card-image-item"
                     src={item.gallery[0]}
@@ -85,14 +75,10 @@ class Card extends Component {
               <div className="card-text" style={{ fontSize: "18px" }}>
                 <div className="card-title">{`${item.brand} ${item.name}`}</div>
                 <div className="card-price" style={{ fontWeight: "500" }}>
-                  {
-                      this.state.currency.symbol === null 
-                      ? this.state.symbol : this.state.currency.symbol
-                  }
-                  { 
-                    item.prices.filter(price => price.currency.symbol 
-                      === this.state.currency.symbol)[0].amount
-                  }
+                  {this.state.currency.symbol === null 
+                      ? this.state.symbol : this.state.currency.symbol}
+                  {item.prices.filter(price => price.currency.symbol 
+                      === this.state.currency.symbol)[0].amount}
                 </div>
               </div>
             </div>
@@ -113,8 +99,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    addToCart: (product) => dispatch(addToCartAction(product)),
     filterProductsByCategory: (category) => 
     dispatch(filterProductsByCategory(category)),
+    productDetailsAction: (product) => dispatch(productDetailsAction(product)),
+    changeGalleryImg: (img) => dispatch(changeGalleryImgAction(img)),
   };
 };
 

@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { CartAttrContent, CartAttributes, CartAttrProps, 
-  CartAttrTitle, CartAttrTypes, CartImg, CartItem, CartItemBrand, 
-  CartItemDetails, CartItemImg, CartItemName, CartItemPrice, 
-  CartItemQty, CartItemQtyDec, CartItemQtyInc, CartItemQtyVal } from './styles/Cart.styled';
+import { 
+  CartItem, CartItemDetails, CartItemImg, CartItemQty, 
+  CartItemQtyDec, CartItemQtyInc, CartItemQtyVal 
+} from './styles/Cart.styled';
 import Plus from '../assets/svg/Plus.svg';
 import Minus from '../assets/svg/Minus.svg';
-import { addToCartAction, removeFromCartAction } from '../redux/actions/Cart';
+import { addToCartAction, removeFromCartAction } 
+  from '../redux/actions/Cart';
 import ItemDes from './ItemDes';
 import ItemPrice from './ItemPrice';
 import ItemAttr from './ItemAttr';

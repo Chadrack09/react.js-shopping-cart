@@ -1,19 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { updateAttributesAction } from '../redux/actions/Cart';
-import store from '../redux/store';
-import { UPDATE_ATTRIBUTES } from '../redux/types';
 import { CartAttrContent, CartAttributes, CartAttrProps, CartAttrTitle, CartAttrTypes } from './styles/Cart.styled';
 
 class ItemAttr extends Component {
 
   constructor(props) {
     super(props);
+    this.radioChange = this.radioChange.bind(this);
   }
 
   radioChange = (product, attr, id) => (e) => {
-    console.log(attr);
-    console.log(e.target.id);
     this.props.updateAttributes(product, attr, id);
   }
 
@@ -28,8 +25,10 @@ class ItemAttr extends Component {
             {
               attr.items.map((property, index) => (
                 <CartAttrProps key={index}>
+
                   <input type="radio" name={`${this.props.itemName}-${attr.name}`} 
                     id={property.id} value={property.value} />
+
                   <label htmlFor={property.id}>
                     <CartAttrTypes 
                       onClick={this.props.action === 'change' 
@@ -60,7 +59,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateAttributes: (product, attr, id) => dispatch(updateAttributesAction(product, attr, id))
+    updateAttributes: (product, attr, id) => 
+        dispatch(updateAttributesAction(product, attr, id))
   }
 }
 
