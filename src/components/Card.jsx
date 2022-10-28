@@ -47,7 +47,6 @@ class Card extends Component {
   }
 
   itemClickEvent = (item) => () => {
-    console.log(item)
     store.dispatch({
       type: PRODUCT_DETAILS,
       payload: item

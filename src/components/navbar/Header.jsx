@@ -46,7 +46,7 @@ class Header extends Component {
     super(props);
     this.state = {
       symbol: "$",
-      isOpen: true,
+      isCurrencyOpen: false,
       isModalOpen: false,
       currencySelected: [],
     };
@@ -77,19 +77,29 @@ class Header extends Component {
         this.props.setCurrency(currency);
       }
     }
+
+    
   }
 
   componentDidCatch(error, info) {
     console.log(error.message, info);
   }
 
-  currencyListEvent = () => {
-    this.state.isOpen ? this.setState({ isOpen: false })
-    : this.setState({ isOpen: true });
+  currencyListEvent = (event) => {
+    event.stopPropagation();
+    this.setState({ isCurrencyOpen: !this.state.isCurrencyOpen }, () => {
+      document.addEventListener('click', this.closeCurrencyList);
+    });
+  }
+
+  closeCurrencyList = () => {
+    this.setState({ isCurrencyOpen: false }, () => {
+      document.removeEventListener('click', this.closeCurrencyList);
+    })
   }
 
   selectedOption = (currency) => () => {
-    this.setState({ isOpen: true });
+    this.setState({ isCurrencyOpen: true });
 
     this.props.setCurrency(currency);
 
@@ -144,13 +154,13 @@ class Header extends Component {
                     {this.state.symbol}
                   </CurrencySymbol>
                   <CustomArrow>
-                    <img src={Arrow} className={"__img_cart_logo"} style={this.state.isOpen ? 
-                      { transform: "rotate(180deg)" } : { transform: "rotate(0deg)" }} alt="Arrow" />
+                    <img src={Arrow} className={"__img_cart_logo"} style={this.state.isCurrencyOpen ? 
+                      { transform: "rotate(0deg)" } : { transform: "rotate(180deg)" }} alt="Arrow" />
                   </CustomArrow>
                 </CurrencyHeader>
 
                 {/* Navbar Currency Dropdown List */}
-                {!this.state.isOpen && (
+                {this.state.isCurrencyOpen && (
                 <ListContainer>
                   <ListItemContainer>
                     {

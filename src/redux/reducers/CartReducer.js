@@ -88,7 +88,6 @@ export const addToCartReducer = (state = initialState, action) => {
     }
 
     case TOTAL_AMOUNT: {
-      console.log("TOTAL_AMOUNT", action.payload);
       return {
         ...state,
         totalAmount: action.payload.totalAmount,

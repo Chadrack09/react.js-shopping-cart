@@ -165,6 +165,10 @@ export const CartAttrTypes = styled.div`
     color: white;
     background-color: #1D1F22;
   `}
+
+  ${props => props.type === 'swatch' && props.value === '#FFFFFF' && `
+    border: 1px solid black;
+  `}
 `;
 
 export const CartItemImg = styled.div`
