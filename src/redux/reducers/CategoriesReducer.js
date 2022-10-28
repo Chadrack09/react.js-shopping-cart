@@ -9,7 +9,6 @@ export const categoriesReducer = (state = [], action) => {
       return state;
   }
 };
-
 export const categoryReducer = (state = {}, action) => {
   switch (action.type) {
     case SET_CATEGORY:

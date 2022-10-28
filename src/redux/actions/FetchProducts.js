@@ -80,21 +80,18 @@ export const filterProductsByCategory = (products, categoryName) => (dispatch) =
     },
   });
 };
-
 export const changeGalleryImgAction = (img) => (dispatch) => {
   dispatch({
     type: CHANGE_GALLERY_IMG,
     payload: img,
   });
 }
-
 export const productDetailsAction = (item) => (dispatch) => {
   dispatch({
     type: PRODUCT_DETAILS,
     payload: item
   });
 }
-
 export async function getchProductById(id) {
   const { data } = await client.query({
     query: GET_PRODUCT_BY_ID_QUERY,
