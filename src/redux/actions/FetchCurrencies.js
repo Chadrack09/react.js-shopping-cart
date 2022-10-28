@@ -14,7 +14,6 @@ export const fetchCurrenciesActions = () => async (dispatch) => {
     payload: data.currencies,
   });
 };
-
 export const setCurrencyAction = (currency) => (dispatch) => {
   dispatch({
     type: CURRENCY_SELECTED,

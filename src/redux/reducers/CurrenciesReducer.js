@@ -8,7 +8,6 @@ export const currenciesReducer = (state = [], action) => {
       return state;
   }
 };
-
 export const currencySelectedReducer = (state = [], action) => {
   switch (action.type) {
     case CURRENCY_SELECTED:

@@ -1,10 +1,5 @@
-import {
-  CHANGE_GALLERY_IMG,
-  FETCH_PRODUCTS,
-  FILTER_PRODUCTS_BY_CATEGORY,
-  PRODUCT_DETAILS,
-  UPDATE_ATTRIBUTES,
-} from "../types";
+import { CHANGE_GALLERY_IMG, FETCH_PRODUCTS, FILTER_PRODUCTS_BY_CATEGORY, 
+  PRODUCT_DETAILS, UPDATE_ATTRIBUTES} from "../types";
 
 export const productsReducer = (state = [], action) => {
   switch (action.type) {
@@ -14,7 +9,6 @@ export const productsReducer = (state = [], action) => {
       return state;
   }
 };
-
 export const filteredProductsReducer = (state = [], action) => {
   switch (action.type) {
     case FILTER_PRODUCTS_BY_CATEGORY:
