@@ -1,8 +1,11 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 
 /**
- * Initializing the connection between the frontend
+ * Initializes the connection between the frontend
  * and the server
+ * 
+ * @param {string} uri The URI of the server
+ * @param {InMemoryCache} cache The cache to use
  */
 
 const client = new ApolloClient({
