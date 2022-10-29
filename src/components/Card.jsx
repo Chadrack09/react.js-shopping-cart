@@ -6,6 +6,9 @@ import { addToCartAction } from '../redux/actions/Cart';
 import { changeGalleryImgAction, filterProductsByCategory, 
   productDetailsAction } from '../redux/actions/FetchProducts';
 
+  /**
+   * Card component to display each product
+   */
 class Card extends Component {
 
   constructor(props) {
@@ -39,10 +42,20 @@ class Card extends Component {
     console.log(error.message, info);
   }
 
+  /**
+   * Adds to cart on green cart logo click event
+   * @param {*} product 
+   * @returns {void}
+   */
   addToCartClickEvent = (product) => () => {
     this.props.addToCart(product);
   }
 
+  /**
+   * Redirects to product details page on image click event
+   * @param {*} item - current product
+   * @returns {void}
+   */
   itemClickEvent = (item) => () => {
     this.props.productDetailsAction(item);
     this.props.changeGalleryImg(item.gallery[0]);

@@ -1,6 +1,20 @@
 import React, { Component } from 'react'
 import { CartItemBrand, CartItemName } from './styles/Cart.styled';
+import PropTypes from 'prop-types';
 
+/**
+ * Reusable component display the name and brand of the product in the cart
+ * 
+ * @property {string} brand - brand of the product
+ * @property {string} name - name of the product
+ * @property {string} bfs - brand font size
+ * @property {string} bfw - brand font weight
+ * @property {string} bmb - brand margin bottom
+ * @property {string} ifs - item font size
+ * @property {string} ifw - item font weight
+ * @property {string} imb - item margin bottom
+ * 
+ */
 class ItemDes extends Component {
   render() {
     return (
@@ -12,6 +26,17 @@ class ItemDes extends Component {
       </>
     )
   }
+}
+
+ItemDes.propTypes = {
+  brand: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  bfs: PropTypes.string,
+  bfw: PropTypes.string,
+  bmb: PropTypes.string,
+  ifs: PropTypes.string,
+  ifw: PropTypes.string,
+  imb: PropTypes.string,
 }
 
 export default ItemDes;

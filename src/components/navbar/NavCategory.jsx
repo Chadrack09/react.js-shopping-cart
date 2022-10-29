@@ -3,7 +3,17 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setCategoryAction } from '../../redux/actions/FetchCategories';
 import { filterProductsByCategory } from '../../redux/actions/FetchProducts';
+import PropTypes from 'prop-types';
 
+/**
+ * NavCategory component to display categories in the navbar
+ * 
+ * @property {object} categories - array of categories
+ * @property {object} products - array of products
+ * @property {function} filterProductsByCategory - action to filter products by category
+ * @property {function} setCategory - action to set category
+ * 
+ */
 class NavCategory extends Component {
 
   constructor(props) {
@@ -38,6 +48,10 @@ class NavCategory extends Component {
       </nav>
     )
   }
+}
+
+NavCategory.propTypes = {
+  categories: PropTypes.array.isRequired,
 }
 
 const mapStateToProps = (state) => {

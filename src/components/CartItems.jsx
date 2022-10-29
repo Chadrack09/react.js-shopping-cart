@@ -12,7 +12,32 @@ import ItemDes from './ItemDes';
 import ItemPrice from './ItemPrice';
 import ItemAttr from './ItemAttr';
 import ImageSlider from './ImageSlider';
+import PropTypes from 'prop-types';
 
+/**
+ * Cart items component to display items in the cart
+ * @property {string} action - action to be performed on the item
+ * @property {string} cibt - cart item border top
+ * @property {string} cibb - cart item border bottom
+ * @property {string} brand - brand of the product
+ * @property {string} name - name of the product
+ * @property {string} bfs - brand font size
+ * @property {string} bfw - brand font weight
+ * @property {string} bmb - brand margin bottom
+ * @property {string} ifs - item font size
+ * @property {string} ifw - item font weight
+ * @property {string} imb - item margin bottom
+ * @property {string} pfs - price font size
+ * @property {string} pfw - price font weight
+ * @property {string} aff - attribute font family
+ * @property {string} afs - attribute font size
+ * @property {string} atw - attributes of type <text> width
+ * @property {string} ath - attributes of type <text> height
+ * @property {string} atfs - attributes of type <text> font size
+ * @property {string} aswh - attributes of type <swatch> width and height
+ * @property {string} ciw - cart item image width
+ * @property {string} cih - cart item image height
+ */
 class CartItems extends Component {
 
   constructor(props) {
@@ -22,7 +47,17 @@ class CartItems extends Component {
     this.decrement = this.decrement.bind(this);
   }
 
+  /**
+   * Increment the quantity of the item
+   * @param {*} item 
+   * @returns {void}
+   */
   increment = (item) => () => {this.props.addToCart(item)}
+  /**
+   * Decrement the quantity of the item
+   * @param {*} item 
+   * @returns {void}
+   */
   decrement = (item) => () => {this.props.removeFromCart(item)}
 
   render() {
@@ -80,6 +115,32 @@ class CartItems extends Component {
       : (<div>Empty shopping cart</div>)
     )
   }
+}
+
+CartItems.propTypes = {
+  action: PropTypes.string,
+  cibt: PropTypes.string,
+  cibb: PropTypes.string,
+  brand: PropTypes.string,
+  name: PropTypes.string,
+  bfs: PropTypes.string,
+  bfw: PropTypes.string,
+  bmb: PropTypes.string,
+  ifs: PropTypes.string,
+  ifw: PropTypes.string,
+  imb: PropTypes.string,
+  pfs: PropTypes.string,
+  pfw: PropTypes.string,
+  aff: PropTypes.string,
+  afs: PropTypes.string,
+  atw: PropTypes.string,
+  ath: PropTypes.string,
+  atfs: PropTypes.string,
+  aswh: PropTypes.string,
+  ciw: PropTypes.string,
+  cih: PropTypes.string,
+  cqwh: PropTypes.string,
+  imr: PropTypes.string,
 }
 
 const mapStateToProps = (state) => {

@@ -17,7 +17,6 @@ import {
  * to redux store by adding a new property to the product object called `checked`
  * to set default attributes value.
  *
- * @type {Boolean} checked
  *
  * ```js
  * let destructuredData = data.category.products.map((product) => { --- line 38
@@ -26,9 +25,6 @@ import {
  *   checked: index === 0 ? true : false,
  * };
  *```
- * @see {@link src\redux\reducers\ProductsReducer.js:48} for more information
- * @author [Chaadrack B.](https://github.com/Chadrack09)
- *
  */
 export const fetchProductsActions = () => async (dispatch) => {
   let { data } = await client
@@ -68,6 +64,12 @@ export const fetchProductsActions = () => async (dispatch) => {
   });
 };
 
+/**
+ * Filter products by category
+ * @param {*} products - all products
+ * @param {*} categoryName - category name
+ * @returns {void}
+ */
 export const filterProductsByCategory = (products, categoryName) => (dispatch) => {
   dispatch({
     type: FILTER_PRODUCTS_BY_CATEGORY,

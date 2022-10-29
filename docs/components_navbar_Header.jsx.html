@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/navbar/Header.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/navbar/Header.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from "react";
+import '../../css/Header.css';
+import NavCategory from "./NavCategory";
+import AppLogo from "../../assets/svg/AppLogo.svg";
+import Arrow from "../../assets/svg/Arrow.svg";
+import CartIcon from "../../assets/svg/CartIconDark.svg";
+import { CurrencyContainer, CurrencyHeader, 
+  CurrencySymbol, CustomArrow, ListContainer, 
+  ListItem, ListItemContainer, ListItemSymbol, 
+  ListItemText } from "../styles/List.styled";
+import { connect } from "react-redux";
+import store from "../../redux/store";
+import { CartContainer, CartCounter, CartLogo } from "../styles/Cart.styled";
+import Modal from "./Modal";
+import { totalAmountAction } from "../../redux/actions/Cart";
+import { setCurrencyAction } from "../../redux/actions/FetchCurrencies";
+import PropTypes from "prop-types";
+
+/**
+ * 
+ * Header component used in the app, displays 
+ * item categories, currency list and cart modal
+ * 
+ * @see {@link https://reactjs.org/docs/components-and-props.html|React Components and Props}
+ * @see {@link https://reactjs.org/docs/react-component.html|React Component}
+ * @see {@link https://reactjs.org/docs/react-component.html#componentdidmount|React Component componentDidMount}
+ * @see {@link https://reactjs.org/docs/react-component.html#componentdidupdate|React Component componentDidUpdate}
+ * @see {@link https://reactjs.org/docs/react-component.html#componentdidcatch|React Component componentDidCatch}
+ * @see {@link https://reactjs.org/docs/react-component.html#componentwillunmount|React Component componentWillUnmount}
+ * 
+ */
+class Header extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      symbol: "$",
+      isCurrencyOpen: false,
+      isModalOpen: false,
+      currencySelected: [],
+    };
+
+    this.currencyListEvent = this.currencyListEvent.bind(this);
+    this.closeCurrencyList = this.closeCurrencyList.bind(this);
+    this.selectedOption = this.selectedOption.bind(this);
+    this.cartIconEvent = this.cartIconEvent.bind(this);
+  }
+
+  static getDerivedStateFromProps(props, state) {
+
+    if(props.currencySelected) {
+      return {
+        symbol: props.currencySelected.symbol,
+      }
+    }
+    return null;
+  }
+
+  componentDidUpdate( prevProps, prevState ) {
+
+    let currency = this.props.currencies
+      .filter(e => typeof e !== undefined).shift();
+    
+    if (currency !== undefined) {
+      let currencySelected = store.getState().currencySelected;
+      if(currencySelected.length === 0) {
+        this.props.setCurrency(currency);
+      }
+    }
+
+    
+  }
+
+  componentDidCatch(error, info) {
+    console.log(error.message, info);
+  }
+
+  /**
+   * Toggle currency list's state on and off
+   * @param {*} event - event from the currency list element
+   * 
+   * @example
+   * this.state = {
+   *  isCurrencyOpen: false,
+   * }
+   * @returns {void} 
+   */
+  currencyListEvent = (event) => {
+    event.stopPropagation();
+    this.setState({ isCurrencyOpen: !this.state.isCurrencyOpen }, () => {
+      document.addEventListener('click', this.closeCurrencyList);
+    });
+  }
+
+  /**
+   * Closes currency list on document click and remove event listener from dom
+   * @returns {void}
+   */
+  closeCurrencyList = () => {
+    this.setState({ isCurrencyOpen: false }, () => {
+      document.removeEventListener('click', this.closeCurrencyList);
+    })
+  }
+
+  /**
+   * 
+   * @param {Object} currency - currency object
+   * @returns {void}
+   */
+  selectedOption = (currency) => () => {
+    this.setState({ isCurrencyOpen: true });
+
+    this.props.setCurrency(currency);
+
+    const totalAmount = this.props.cartItems.reduce((acc, item) =>
+      acc + (item.prices.filter(price => 
+      price.currency.symbol === currency.symbol)[0].amount * item.qty), 0)
+    const tax = totalAmount * 0.21;
+    
+    this.props.totalAmountAction(totalAmount, tax);
+  }
+
+  /**
+   * Toggle modal's state on and off when cart icon is clicked
+   * @returns {void}
+   */
+  cartIconEvent = () => {
+    this.setState({ isModalOpen: !this.state.isModalOpen });
+
+    this.state.isModalOpen ? document.body.style.overflow = 'unset' 
+        : document.body.style.overflow = 'hidden';
+  }
+
+  /**
+   * Set action to close modal when clicked outside of modal
+   * @returns {void}
+   */
+  overlayClose = () => {
+    if(this.state.isModalOpen) {
+      this.setState({ isModalOpen: !this.state.isModalOpen });
+    }
+    this.state.isModalOpen ? document.body.style.overflow = 'unset' 
+        : document.body.style.overflow = 'hidden';
+  }
+
+  /**
+   * Set modal not to close when clicked inside of modal
+   * @param {*} event
+   */
+  modalContainerEvent = (event) => {
+    event.stopPropagation();
+  }
+
+  render() {
+    return (
+      &lt;header className="header">
+        &lt;div className="navbar-container c-container">
+
+          {/* Navbar Category List */}
+          &lt;NavCategory categories={this.props.categories} />
+
+          {/* Navbar Logo */}
+          &lt;div className="logo-main-container">
+            &lt;img src={AppLogo} alt="Application Logo" />
+          &lt;/div>
+
+          {/* Navbar Right Actions */}
+          &lt;div className="">
+            &lt;div className="actions">
+              &lt;CurrencyContainer>
+
+                {/* Navbar Currency List */}
+                &lt;CurrencyHeader onClick={this.currencyListEvent}>
+                  &lt;CurrencySymbol>
+                    {this.state.symbol}
+                  &lt;/CurrencySymbol>
+                  &lt;CustomArrow>
+                    &lt;img src={Arrow} className={"__img_cart_logo"} style={this.state.isCurrencyOpen ? 
+                      { transform: "rotate(0deg)" } : { transform: "rotate(180deg)" }} alt="Arrow" />
+                  &lt;/CustomArrow>
+                &lt;/CurrencyHeader>
+
+                {/* Navbar Currency Dropdown List */}
+                {this.state.isCurrencyOpen &amp;&amp; (
+                &lt;ListContainer>
+                  &lt;ListItemContainer>
+                    {
+                      this.props.currencies.map((currency, index) => (
+                        &lt;ListItem key={index} onClick={this.selectedOption(currency)}>
+                          &lt;ListItemSymbol style={{ fontWeight: "500", }}>{currency.symbol}&lt;/ListItemSymbol>
+                          &lt;ListItemText style={{ marginLeft: ".5rem", fontSize: "14px" }}>{currency.label}&lt;/ListItemText>
+                        &lt;/ListItem>
+                      ))
+                    }
+                  &lt;/ListItemContainer>
+                &lt;/ListContainer>
+                )}
+              &lt;/CurrencyContainer>
+
+              {/* Cart Icon */}
+              &lt;CartContainer>
+                &lt;CartLogo src={CartIcon} onClick={this.cartIconEvent} />
+                &lt;CartCounter>{this.props.totalQty}&lt;/CartCounter>
+              &lt;/CartContainer>
+
+              {/* Cart Modal */}
+              &lt;Modal open={this.state.isModalOpen}
+                    overlayClose={this.overlayClose}
+                    modalContainer={this.modalContainerEvent}
+                    currency={this.state.currencySelected} />
+            &lt;/div>
+          &lt;/div>
+        &lt;/div>
+      &lt;/header>
+    );
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    cartItems: state.cart.cartItems,
+    categories: state.categories,
+    currencies: state.currencies,
+    currencySelected: state.currencySelected[0],
+    totalQty: state.cart.totalQty,
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  totalAmountAction: (totalAmount, tax) => dispatch(totalAmountAction(totalAmount, tax)),
+  setCurrency: (currency) => dispatch(setCurrencyAction(currency)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Button.html">Button</a></li><li><a href="Card.html">Card</a></li><li><a href="CartItems.html">CartItems</a></li><li><a href="Header.html">Header</a></li><li><a href="ImageSlider.html">ImageSlider</a></li><li><a href="ItemAttr.html">ItemAttr</a></li><li><a href="ItemDes.html">ItemDes</a></li><li><a href="ItemDetails.html">ItemDetails</a></li><li><a href="ItemPrice.html">ItemPrice</a></li><li><a href="Modal.html">Modal</a></li><li><a href="NavCategory.html">NavCategory</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ADD_TO_CART">ADD_TO_CART</a></li><li><a href="global.html#client">client</a></li><li><a href="global.html#fetchProductsActions">fetchProductsActions</a></li><li><a href="global.html#filterProductsByCategory">filterProductsByCategory</a></li><li><a href="global.html#REMOVE_FROM_CART">REMOVE_FROM_CART</a></li><li><a href="global.html#TOTAL_AMOUNT">TOTAL_AMOUNT</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Sat Oct 29 2022 03:40:48 GMT+0200 (South Africa Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

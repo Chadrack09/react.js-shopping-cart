@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/CartItems.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/CartItems.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import { 
+  CartItem, CartItemDetails, CartItemImg, CartItemQty, 
+  CartItemQtyDec, CartItemQtyInc, CartItemQtyVal 
+} from './styles/Cart.styled';
+import Plus from '../assets/svg/Plus.svg';
+import Minus from '../assets/svg/Minus.svg';
+import { addToCartAction, removeFromCartAction } 
+  from '../redux/actions/Cart';
+import ItemDes from './ItemDes';
+import ItemPrice from './ItemPrice';
+import ItemAttr from './ItemAttr';
+import ImageSlider from './ImageSlider';
+import PropTypes from 'prop-types';
+
+/**
+ * Cart items component to display items in the cart
+ * @property {string} action - action to be performed on the item
+ * @property {string} cibt - cart item border top
+ * @property {string} cibb - cart item border bottom
+ * @property {string} brand - brand of the product
+ * @property {string} name - name of the product
+ * @property {string} bfs - brand font size
+ * @property {string} bfw - brand font weight
+ * @property {string} bmb - brand margin bottom
+ * @property {string} ifs - item font size
+ * @property {string} ifw - item font weight
+ * @property {string} imb - item margin bottom
+ * @property {string} pfs - price font size
+ * @property {string} pfw - price font weight
+ * @property {string} aff - attribute font family
+ * @property {string} afs - attribute font size
+ * @property {string} atw - attributes of type &lt;text> width
+ * @property {string} ath - attributes of type &lt;text> height
+ * @property {string} atfs - attributes of type &lt;text> font size
+ * @property {string} aswh - attributes of type &lt;swatch> width and height
+ * @property {string} ciw - cart item image width
+ * @property {string} cih - cart item image height
+ */
+class CartItems extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.increment = this.increment.bind(this);
+    this.decrement = this.decrement.bind(this);
+  }
+
+  /**
+   * Increment the quantity of the item
+   * @param {*} item 
+   * @returns {void}
+   */
+  increment = (item) => () => {this.props.addToCart(item)}
+  /**
+   * Decrement the quantity of the item
+   * @param {*} item 
+   * @returns {void}
+   */
+  decrement = (item) => () => {this.props.removeFromCart(item)}
+
+  render() {
+    return (
+      this.props.cartItems.length > 0 
+      ?(
+        this.props.cartItems.map((item, index) => (
+        &lt;CartItem key={index} cibt={this.props.cibt} cibb={this.props.cibb}>
+          &lt;CartItemDetails>
+            &lt;ItemDes 
+                brand={item.brand} name={item.name} 
+                bfs={this.props.bfs} bfw={this.props.bfw} bmb={this.props.bmb} 
+                ifs={this.props.ifs} ifw={this.props.ifw} imb={"20px"} />
+
+            &lt;ItemPrice 
+                symbol={this.props.currency.symbol}
+                prices={item.prices}
+                pfs={this.props.pfs} pfw={this.props.pfw} 
+                imb={this.props.imb} />
+            {
+              item.attributes.length > 0 ? (
+                &lt;ItemAttr 
+                  attributes={item.attributes} itemName={item.name}
+                  aff={this.props.aff} afs={this.props.afs}
+                  atw={this.props.atw} ath={this.props.ath} atfs={this.props.atfs}
+                  aswh={this.props.aswh} />
+              ) : null  
+            }
+          &lt;/CartItemDetails>
+
+          {/* Image Gallery */}
+          &lt;CartItemImg cih={this.props.cih}>
+
+            {/* Qty Increment Decrement */}
+            &lt;CartItemQty cqwh={this.props.cqwh} imr={this.props.imr}>
+              &lt;CartItemQtyInc cqwh={this.props.cqwh} onClick={this.increment(item)}>
+                &lt;img src={Plus} alt="Plus" />&lt;/CartItemQtyInc>
+              &lt;CartItemQtyVal cqwh={this.props.cqwh} pfs={this.props.pfs}>
+                &lt;span>{item.qty}&lt;/span>
+              &lt;/CartItemQtyVal>
+              &lt;CartItemQtyDec cqwh={this.props.cqwh} onClick={this.decrement(item)}>
+                &lt;img src={Minus} alt="Minus" />&lt;/CartItemQtyDec>
+            &lt;/CartItemQty>
+
+            {/* Image Slider Component */}
+            &lt;ImageSlider 
+              action={this.props.action}
+              gallery={item.gallery} 
+              name={item.name} 
+              ciw={this.props.ciw} 
+              cih={this.props.cih}/>
+          &lt;/CartItemImg>
+        &lt;/CartItem>
+      ))) 
+      : (&lt;div>Empty shopping cart&lt;/div>)
+    )
+  }
+}
+
+CartItems.propTypes = {
+  action: PropTypes.string,
+  cibt: PropTypes.string,
+  cibb: PropTypes.string,
+  brand: PropTypes.string,
+  name: PropTypes.string,
+  bfs: PropTypes.string,
+  bfw: PropTypes.string,
+  bmb: PropTypes.string,
+  ifs: PropTypes.string,
+  ifw: PropTypes.string,
+  imb: PropTypes.string,
+  pfs: PropTypes.string,
+  pfw: PropTypes.string,
+  aff: PropTypes.string,
+  afs: PropTypes.string,
+  atw: PropTypes.string,
+  ath: PropTypes.string,
+  atfs: PropTypes.string,
+  aswh: PropTypes.string,
+  ciw: PropTypes.string,
+  cih: PropTypes.string,
+  cqwh: PropTypes.string,
+  imr: PropTypes.string,
+}
+
+const mapStateToProps = (state) => {
+  return {
+    currency: state.currencySelected[0],
+    cartItems: state.cart.cartItems,
+    totalQty: state.cart.totalQty,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToCart: (item) => dispatch(addToCartAction(item)),
+    removeFromCart: (item) => dispatch(removeFromCartAction(item)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartItems);</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Button.html">Button</a></li><li><a href="Card.html">Card</a></li><li><a href="CartItems.html">CartItems</a></li><li><a href="Header.html">Header</a></li><li><a href="ImageSlider.html">ImageSlider</a></li><li><a href="ItemAttr.html">ItemAttr</a></li><li><a href="ItemDes.html">ItemDes</a></li><li><a href="ItemDetails.html">ItemDetails</a></li><li><a href="ItemPrice.html">ItemPrice</a></li><li><a href="Modal.html">Modal</a></li><li><a href="NavCategory.html">NavCategory</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ADD_TO_CART">ADD_TO_CART</a></li><li><a href="global.html#client">client</a></li><li><a href="global.html#fetchProductsActions">fetchProductsActions</a></li><li><a href="global.html#filterProductsByCategory">filterProductsByCategory</a></li><li><a href="global.html#REMOVE_FROM_CART">REMOVE_FROM_CART</a></li><li><a href="global.html#TOTAL_AMOUNT">TOTAL_AMOUNT</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Sat Oct 29 2022 03:40:48 GMT+0200 (South Africa Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

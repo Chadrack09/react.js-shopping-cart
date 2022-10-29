@@ -9,8 +9,15 @@ import ItemPrice from './ItemPrice';
 import ItemAttr from './ItemAttr';
 import { Query } from '@apollo/client/react/components';
 import { GET_PRODUCT_BY_ID_QUERY } from '../service/Queries';
-import { changeGalleryImgAction, productDetailsAction } from '../redux/actions/FetchProducts';
+import { changeGalleryImgAction, 
+  productDetailsAction } from '../redux/actions/FetchProducts';
+import PropTypes from 'prop-types';
 
+/**
+ * Item details component to display information about a product
+ * @property {object} product - product to be displayed
+ * 
+ */
 class ItemDetails extends Component {
   
   constructor(props) {
@@ -22,6 +29,10 @@ class ItemDetails extends Component {
     this.setImage = this.setImage.bind(this);
   }
 
+  /**
+   * Sets the image to be displayed in the main image container
+   * @param {*} image 
+   */
   setImage = (image) => () => {
     store.dispatch({
       type: CHANGE_GALLERY_IMG,
@@ -85,6 +96,7 @@ class ItemDetails extends Component {
                   </div>
                   <div className="item-detail-cart">
                     <div className="cart-detail-container">
+                      
                     <ItemDes
                       brand={this.props.productDetails.brand} 
                       name={this.props.productDetails.name} 
@@ -137,6 +149,10 @@ class ItemDetails extends Component {
       </Query>
     )
   }
+}
+
+ItemDetails.propTypes = {
+  product: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = (state) => {

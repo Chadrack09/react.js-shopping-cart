@@ -1,8 +1,21 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { addToCartAction } from '../redux/actions/Cart';
-import { ItemButton } from './styles/Button.styled'
+import { ItemButton } from './styles/Button.styled';
+import PropTypes from 'prop-types';
 
+/**
+ * Reusable button component used in the application
+ * 
+ * @property {string} text - text to be displayed on the button
+ * @property {string} fontSize - font size of the button
+ * @property {string} color - color of the button
+ * @property {string} bgColor - background color of the button
+ * @property {string} width - width of the button
+ * @property {string} height - height of the button
+ * @property {string} border - border of the button
+ * 
+ */
 class Button extends Component {
 
   constructor(props) {
@@ -10,6 +23,11 @@ class Button extends Component {
     this.addToCart = this.addToCart.bind(this);
   }
   
+  /**
+   * Adds product to cart
+   * @param {*} product - product to be added to cart
+   * @returns {void}
+   */
   addToCart = (product) => () => {this.props.addToCart(product)}
 
   render() {
@@ -23,6 +41,16 @@ class Button extends Component {
           {this.props.text}</ItemButton>
     )
   }
+}
+
+Button.propTypes = {
+  text: PropTypes.string.isRequired,
+  fontSize: PropTypes.string,
+  color: PropTypes.string,
+  bgColor: PropTypes.string,
+  width: PropTypes.string,
+  height: PropTypes.string,
+  border: PropTypes.string,
 }
 
 const mapStateToProps = (state) => {
