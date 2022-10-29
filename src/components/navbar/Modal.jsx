@@ -4,14 +4,21 @@ import { Link } from 'react-router-dom';
 import { totalAmountAction } from '../../redux/actions/Cart';
 import Button from '../Button';
 import CartItems from '../CartItems';
+import PropTypes from 'prop-types';
 
 /**
  * 
- * @description Modal component to display minicart items, 
+ * Modal component to display minicart items, 
  * total amount and checkout button
+ * 
+ * @property {object} cartItems - array of items in the cart
+ * @property {object} currency - object of selected currency
+ * @property {number} totalQty - total quantity of items in the cart
+ * @property {number} totalAmount - total amount of items in the cart
+ * @property {function} totalAmountAction - action to set total amount and tax
+ * 
  */
 class Modal extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -109,6 +116,14 @@ class Modal extends Component {
       ):null
     )
   }
+}
+
+Modal.propTypes = {
+  cartItems: PropTypes.array,
+  currency: PropTypes.object,
+  totalQty: PropTypes.number,
+  totalAmount: PropTypes.number,
+  totalAmountAction: PropTypes.func,
 }
 
 const mapStateToProps = state => ({

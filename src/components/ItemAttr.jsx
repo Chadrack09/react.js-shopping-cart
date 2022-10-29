@@ -1,8 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { updateAttributesAction } from '../redux/actions/Cart';
-import { CartAttrContent, CartAttributes, CartAttrProps, CartAttrTitle, CartAttrTypes } from './styles/Cart.styled';
+import { CartAttrContent, CartAttributes, CartAttrProps, 
+  CartAttrTitle, CartAttrTypes } from './styles/Cart.styled';
+import PropTypes from 'prop-types';
 
+/**
+ * Reusable component to display the attributes of the product
+ * 
+ * @property {string} action - action to be performed on the component
+ * @property {string} cursor - define type of cursor to be displayed
+ * @property {array} attributes - attributes of the product
+ * @property {string} itemName - name of the product
+ * @property {string} aff - attribute font family
+ * @property {string} afs - attribute font size
+ * @property {string} atw - attributes of type <text> width
+ * @property {string} ath - attributes of type <text> height
+ * @property {string} atfs - attributes of type <text> font size
+ * @property {string} aswh - attributes of type <swatch> width and height
+ */
 class ItemAttr extends Component {
 
   constructor(props) {
@@ -10,6 +26,14 @@ class ItemAttr extends Component {
     this.radioChange = this.radioChange.bind(this);
   }
 
+  /**
+   * Updates the attributes of the product on radio button change event 
+   * and if the action is 'change'
+   * @param {*} product - product to be updated
+   * @param {*} attr - attribute to be updated
+   * @param {*} id - id of the attribute to be updated
+   * @returns {void}
+   */
   radioChange = (product, attr, id) => (e) => {
     this.props.updateAttributes(product, attr, id);
   }
@@ -49,6 +73,19 @@ class ItemAttr extends Component {
       ))
     )
   }
+}
+
+ItemAttr.propTypes = {
+  action: PropTypes.string,
+  cursor: PropTypes.string,
+  attributes: PropTypes.array.isRequired,
+  itemName: PropTypes.string.isRequired,
+  aff: PropTypes.string,
+  afs: PropTypes.string,
+  atw: PropTypes.string,
+  ath: PropTypes.string,
+  atfs: PropTypes.string,
+  aswh: PropTypes.string,
 }
 
 const mapStateToProps = (state) => {

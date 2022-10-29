@@ -14,22 +14,12 @@ import { CartContainer, CartCounter, CartLogo } from "../styles/Cart.styled";
 import Modal from "./Modal";
 import { totalAmountAction } from "../../redux/actions/Cart";
 import { setCurrencyAction } from "../../redux/actions/FetchCurrencies";
+import PropTypes from "prop-types";
 
 /**
- * @description Header component used in the app,
- * displays the logo, categories, cart and currency
  * 
- * 
- * @param {object} props - props passed from parent component
- * @param {array} props.cartItems - array of items in the cart
- * @param {array} props.categories - array of categories
- * @param {array} props.currencies - array of currencies
- * @param {object} props.currencySelected - object of selected currency
- * @param {number} props.totalQty - total quantity of items in the cart
- * @param {function} props.totalAmountAction - action to set total amount and tax
- * @param {function} props.setCurrency - action to set currency
- * 
- * @returns {JSX.Element} - Header component
+ * Header component used in the app, displays 
+ * item categories, currency list and cart modal
  * 
  * @see {@link https://reactjs.org/docs/components-and-props.html|React Components and Props}
  * @see {@link https://reactjs.org/docs/react-component.html|React Component}
@@ -38,7 +28,6 @@ import { setCurrencyAction } from "../../redux/actions/FetchCurrencies";
  * @see {@link https://reactjs.org/docs/react-component.html#componentdidcatch|React Component componentDidCatch}
  * @see {@link https://reactjs.org/docs/react-component.html#componentwillunmount|React Component componentWillUnmount}
  * 
- * @author  Chaadrack Boudzoumou
  */
 class Header extends Component {
 
@@ -86,6 +75,16 @@ class Header extends Component {
     console.log(error.message, info);
   }
 
+  /**
+   * Toggle currency list's state on and off
+   * @param {*} event - event from the currency list element
+   * 
+   * @example
+   * this.state = {
+   *  isCurrencyOpen: false,
+   * }
+   * @returns {void} 
+   */
   currencyListEvent = (event) => {
     event.stopPropagation();
     this.setState({ isCurrencyOpen: !this.state.isCurrencyOpen }, () => {
@@ -93,12 +92,21 @@ class Header extends Component {
     });
   }
 
+  /**
+   * Closes currency list on document click and remove event listener from dom
+   * @returns {void}
+   */
   closeCurrencyList = () => {
     this.setState({ isCurrencyOpen: false }, () => {
       document.removeEventListener('click', this.closeCurrencyList);
     })
   }
 
+  /**
+   * 
+   * @param {Object} currency - currency object
+   * @returns {void}
+   */
   selectedOption = (currency) => () => {
     this.setState({ isCurrencyOpen: true });
 
@@ -112,6 +120,10 @@ class Header extends Component {
     this.props.totalAmountAction(totalAmount, tax);
   }
 
+  /**
+   * Toggle modal's state on and off when cart icon is clicked
+   * @returns {void}
+   */
   cartIconEvent = () => {
     this.setState({ isModalOpen: !this.state.isModalOpen });
 
@@ -119,6 +131,10 @@ class Header extends Component {
         : document.body.style.overflow = 'hidden';
   }
 
+  /**
+   * Set action to close modal when clicked outside of modal
+   * @returns {void}
+   */
   overlayClose = () => {
     if(this.state.isModalOpen) {
       this.setState({ isModalOpen: !this.state.isModalOpen });
@@ -127,6 +143,10 @@ class Header extends Component {
         : document.body.style.overflow = 'hidden';
   }
 
+  /**
+   * Set modal not to close when clicked inside of modal
+   * @param {*} event
+   */
   modalContainerEvent = (event) => {
     event.stopPropagation();
   }
@@ -196,7 +216,6 @@ class Header extends Component {
   }
 }
 
-// Mapping redux state to header component props
 const mapStateToProps = (state) => {
   return {
     cartItems: state.cart.cartItems,
