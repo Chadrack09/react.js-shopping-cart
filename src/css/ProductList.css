@@ -96,7 +96,7 @@
   opacity: 0;
 }
 .card-item:hover .break {
-  opacity: 100%;
+  opacity: 1;
 }
 
 .break .logo-add-to-cart {
