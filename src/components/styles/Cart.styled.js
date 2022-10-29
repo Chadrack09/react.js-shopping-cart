@@ -48,34 +48,6 @@ export const CartModalContent = styled.div`
   height: 495px;
   background-color: aqua;
 `;
-
-/** 
- * 1. Customed styled component for CartItems component
- * 2. Used in Cart.js and Modal.jsx
- * 3. Reusable component
- * 4. Props are passed from Cart.js and Modal.jsx
- * 5. Props are used in CartItems.js
- * 
- * @property {string} cibt - cart item border top
- * @property {string} cibb - cart item border bottom
- * @property {string} bfs - brand font size
- * @property {string} bfw - brand font weight
- * @property {string} bmb - brand margin bottom
- * @property {string} ifs - item font size
- * @property {string} ifw - item font weight
- * @property {string} imb - item margin bottom
- * @property {string} pfs - price font size
- * @property {string} pfw - price font weight
- * @property {string} aff - attributes title font family
- * @property {string} afs - attributes title font size
- * @property {string} atw - attributes type text width
- * @property {string} ath - attributes type text height
- * @property {string} atfs - attributes type text font size
- * @property {string} aswh - attributes type <swatch> width and height
- * @property {string} cqwh - cart quantity width and height
- * @property {string} ciw - cart image width
- * @property {string} cih - cart image height
- */
 export const CartItem = styled.div`
   width: 100%;
   height: auto;
