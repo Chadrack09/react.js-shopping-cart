@@ -1,8 +1,8 @@
 # React Shopping Cart App 
 
 ## Documentation
-The documentation is provided using JSDOc Library. Open [JsDoc](./docs/index.html)
-to view documentation
+The documentation is provided using JSDOc Library. Open [JsDoc](./docs/index.html) 
+index file in your browser to view the documentation.
 
 ## Available Scripts
 In the project directory, you can run:
