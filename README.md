@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# React Shopping Cart App 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Documentation
+The documentation is provided using JSDOc Library. Open [JsDoc](./docs/index.html)
+to view documentation
 
 ## Available Scripts
 In the project directory, you can run:
