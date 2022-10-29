@@ -5,7 +5,6 @@ import { ApolloClient, InMemoryCache } from "@apollo/client";
  * and the server
  * 
  * @param {string} uri The URI of the server
- * @param {InMemoryCache} cache The cache to use
  */
 
 const client = new ApolloClient({
