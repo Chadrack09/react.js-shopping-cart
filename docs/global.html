@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Global</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Global</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="ADD_TO_CART"><span class="type-signature">(constant) </span>ADD_TO_CART<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>this action adds new item to cart and increase qty</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="redux_types.js.html">redux/types.js</a>, <a href="redux_types.js.html#line11">line 11</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="client"><span class="type-signature">(constant) </span>client<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>Initializes the connection between the frontend
+and the server</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="service_Client.js.html">service/Client.js</a>, <a href="service_Client.js.html#line11">line 11</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="fetchProductsActions"><span class="type-signature">(constant) </span>fetchProductsActions<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>Fetches all products from server and dispatches the results
+to redux store by adding a new property to the product object called <code>checked</code>
+to set default attributes value.</p>
+<pre class="prettyprint source lang-js"><code>let destructuredData = data.category.products.map((product) => { --- line 38
+return {
+  ...item,
+  checked: index === 0 ? true : false,
+};
+</code></pre>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="redux_actions_FetchProducts.js.html">redux/actions/FetchProducts.js</a>, <a href="redux_actions_FetchProducts.js.html#line29">line 29</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="filterProductsByCategory"><span class="type-signature">(constant) </span>filterProductsByCategory<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>Filter products by category</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="redux_actions_FetchProducts.js.html">redux/actions/FetchProducts.js</a>, <a href="redux_actions_FetchProducts.js.html#line73">line 73</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="REMOVE_FROM_CART"><span class="type-signature">(constant) </span>REMOVE_FROM_CART<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>this action decreases item qty and remove when qty is 0</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="redux_types.js.html">redux/types.js</a>, <a href="redux_types.js.html#line17">line 17</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="TOTAL_AMOUNT"><span class="type-signature">(constant) </span>TOTAL_AMOUNT<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>this action set total amount of all item in the cart and tax value</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="redux_types.js.html">redux/types.js</a>, <a href="redux_types.js.html#line22">line 22</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Button.html">Button</a></li><li><a href="Card.html">Card</a></li><li><a href="CartItems.html">CartItems</a></li><li><a href="Header.html">Header</a></li><li><a href="ImageSlider.html">ImageSlider</a></li><li><a href="ItemAttr.html">ItemAttr</a></li><li><a href="ItemDes.html">ItemDes</a></li><li><a href="ItemDetails.html">ItemDetails</a></li><li><a href="ItemPrice.html">ItemPrice</a></li><li><a href="Modal.html">Modal</a></li><li><a href="NavCategory.html">NavCategory</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ADD_TO_CART">ADD_TO_CART</a></li><li><a href="global.html#client">client</a></li><li><a href="global.html#fetchProductsActions">fetchProductsActions</a></li><li><a href="global.html#filterProductsByCategory">filterProductsByCategory</a></li><li><a href="global.html#REMOVE_FROM_CART">REMOVE_FROM_CART</a></li><li><a href="global.html#TOTAL_AMOUNT">TOTAL_AMOUNT</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Sat Oct 29 2022 03:40:48 GMT+0200 (South Africa Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

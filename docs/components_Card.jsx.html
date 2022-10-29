@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Card.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Card.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Logo from "../assets/svg/CartIconLight.svg";
+import { addToCartAction } from '../redux/actions/Cart';
+import { changeGalleryImgAction, filterProductsByCategory, 
+  productDetailsAction } from '../redux/actions/FetchProducts';
+
+  /**
+   * Card component to display each product
+   */
+class Card extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      symbol: "₹",
+      currency: {},
+      products: [],
+      productsFiltered: [],
+      category: {},
+    }
+
+    this.addToCartClickEvent = this.addToCartClickEvent.bind(this);
+    this.itemClickEvent = this.itemClickEvent.bind(this);
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if(props.products.length > 0 &amp;&amp; props.currency.length > 0) {
+      return {
+        currency: props.currency[0],
+        products: props.products,
+        productsFiltered: props.productsFiltered,
+        category: props.category,
+
+      }
+    }
+    return null;
+  }
+
+  componentDidCatch(error, info) {
+    console.log(error.message, info);
+  }
+
+  /**
+   * Adds to cart on green cart logo click event
+   * @param {*} product 
+   * @returns {void}
+   */
+  addToCartClickEvent = (product) => () => {
+    this.props.addToCart(product);
+  }
+
+  /**
+   * Redirects to product details page on image click event
+   * @param {*} item - current product
+   * @returns {void}
+   */
+  itemClickEvent = (item) => () => {
+    this.props.productDetailsAction(item);
+    this.props.changeGalleryImg(item.gallery[0]);
+  }
+
+  render() {
+
+    return (
+        this.state.productsFiltered.length > 0 ?
+        (
+          this.state.productsFiltered.map((item, index) => (
+          &lt;div className="card-item" key={index}>
+            &lt;div className="card-block">
+              &lt;span className={ !item.inStock ? "stock-state" : "" }>
+                { item.inStock ? "" : (&lt;p className="stock-text">out of stock&lt;/p>) }&lt;/span>
+              &lt;div className="card-image">
+                &lt;Link to={`/${item.brand}${item.name}/${item.id}`} >
+                  &lt;img
+                    className="card-image-item"
+                    src={item.gallery[0]}
+                    alt={item.name}
+                    onClick={this.itemClickEvent(item)} />
+                &lt;/Link>
+              &lt;/div>
+                &lt;div className="break">
+                  &lt;div className="logo-add-to-cart" onClick={this.addToCartClickEvent(item)} >
+                    &lt;img className={`logo-light`} src={Logo} alt="item" />
+                  &lt;/div>
+                &lt;/div>
+              &lt;div className="card-text" style={{ fontSize: "18px" }}>
+                &lt;div className="card-title">{`${item.brand} ${item.name}`}&lt;/div>
+                &lt;div className="card-price" style={{ fontWeight: "500" }}>
+                  {this.state.currency.symbol === null 
+                      ? this.state.symbol : this.state.currency.symbol}
+                  {item.prices.filter(price => price.currency.symbol 
+                      === this.state.currency.symbol)[0].amount}
+                &lt;/div>
+              &lt;/div>
+            &lt;/div>
+          &lt;/div>
+        ))
+      ) : (&lt;div>Card Loading...&lt;/div>)
+    )
+  }     
+}
+
+const mapStateToProps = state => ({
+  products: state.products,
+  productsFiltered: state.productsFiltered.products,
+  category: state.categorySelected,
+  currency: state.currencySelected,
+  productDetails: state.productDetails,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToCart: (product) => dispatch(addToCartAction(product)),
+    filterProductsByCategory: (category) => 
+    dispatch(filterProductsByCategory(category)),
+    productDetailsAction: (product) => dispatch(productDetailsAction(product)),
+    changeGalleryImg: (img) => dispatch(changeGalleryImgAction(img)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Card);</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Button.html">Button</a></li><li><a href="Card.html">Card</a></li><li><a href="CartItems.html">CartItems</a></li><li><a href="Header.html">Header</a></li><li><a href="ImageSlider.html">ImageSlider</a></li><li><a href="ItemAttr.html">ItemAttr</a></li><li><a href="ItemDes.html">ItemDes</a></li><li><a href="ItemDetails.html">ItemDetails</a></li><li><a href="ItemPrice.html">ItemPrice</a></li><li><a href="Modal.html">Modal</a></li><li><a href="NavCategory.html">NavCategory</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ADD_TO_CART">ADD_TO_CART</a></li><li><a href="global.html#client">client</a></li><li><a href="global.html#fetchProductsActions">fetchProductsActions</a></li><li><a href="global.html#filterProductsByCategory">filterProductsByCategory</a></li><li><a href="global.html#REMOVE_FROM_CART">REMOVE_FROM_CART</a></li><li><a href="global.html#TOTAL_AMOUNT">TOTAL_AMOUNT</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Sat Oct 29 2022 03:40:48 GMT+0200 (South Africa Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
