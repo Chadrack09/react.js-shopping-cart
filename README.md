@@ -2,7 +2,9 @@
 
 ## Documentation
 The documentation is provided using JSDOc Library. Open [JsDoc](./docs/index.html) 
-index file in your browser to view the documentation.
+index file in your browser to view the documentation. 
+
+Double click on `price` to edit and double click or press enter to exit edit mode 
 
 ## Development 
 In the project directory, you can run:

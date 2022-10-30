@@ -73,6 +73,42 @@ export const CartItemPrice = styled.div`
   font-size: ${props => props.pfs};
   font-weight: ${props => props.pfw};
   margin-bottom: ${props => props.imb};
+  display: flex;
+  align-items: center;
+
+  ${props => props.inEditMode && 
+  `
+    input {
+      color: #5ECE7B;
+      width: 100px;
+      font-size: ${props.pfs};
+      font-family: 'Source Sans Pro', sans-serif;
+      border: none;
+      border-bottom: 1px solid #5ECE7B;
+
+      &:focus {
+        outline: none;
+      }
+    } 
+    
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+  `}
+`;
+export const PriceSymbol = styled.div`
+  font-size: ${props => props.pfs};
+`;
+export const PriceValue = styled.div`
+  font-size: ${props => props.pfs};
 `;
 export const CartAttributes = styled.div`
   margin-bottom: 1rem;

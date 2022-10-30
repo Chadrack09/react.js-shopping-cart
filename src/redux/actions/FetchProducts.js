@@ -55,15 +55,23 @@ export const fetchProductsActions = () => async (dispatch) => {
     payload: destructuredData,
   });
 
+  // dispatch({
+  //   type: FILTER_PRODUCTS_BY_CATEGORY,
+  //   payload: {
+  //     categoryName: "all",
+  //     products: destructuredData,
+  //   },
+  // });
+};
+export const dispatchProductFiltered = (categoryName, products) => (dispatch) => {
   dispatch({
     type: FILTER_PRODUCTS_BY_CATEGORY,
     payload: {
-      categoryName: "all",
-      products: destructuredData,
+      categoryName,
+      products,
     },
   });
 };
-
 /**
  * Filter products by category
  * @param {*} products - all products
