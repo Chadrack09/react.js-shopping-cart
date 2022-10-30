@@ -124,7 +124,7 @@ class ItemDetails extends Component {
 
                           <ItemPrice
                             symbol={this.props.currency.symbol}
-                            prices={this.props.productDetails.prices}
+                            item={this.props.productDetails}
                             pfs={"24px"} pfw={"700"} 
                             imb={"20px"} />
                         </div>

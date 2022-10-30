@@ -20,3 +20,5 @@ export const PRODUCT_DETAILS = "PRODUCT_DETAILS";
 
 /** @description this action set total amount of all item in the cart and tax value */
 export const TOTAL_AMOUNT = "TOTAL_AMOUNT";
+
+export const CHANGE_PRICE = "CHANGE_PRICE";

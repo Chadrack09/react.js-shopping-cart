@@ -128,6 +128,9 @@
 .card-text {
   margin-top: 24px;
 }
+.card-title {
+  margin-bottom: .3rem;
+}
 
 /* Media queries */
 @media (max-width: 1280px) {

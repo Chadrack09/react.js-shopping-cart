@@ -1,4 +1,4 @@
-import {ADD_TO_CART, REMOVE_FROM_CART, TOTAL_AMOUNT} from "../types";
+import {ADD_TO_CART, CHANGE_PRICE, REMOVE_FROM_CART, TOTAL_AMOUNT} from "../types";
 
 const initialState = {
   cartItems: [],
@@ -91,6 +91,33 @@ export const addToCartReducer = (state = initialState, action) => {
       }
     }
 
+    case CHANGE_PRICE: {
+      console.log("FROM ADD TO CART REDUCER", action.payload);
+
+      if(state.cartItems.some(item => item.id === action.payload.product.id)) {
+        return {
+          ...state,
+          cartItems: state.cartItems.map((item) =>
+            item.id === action.payload.product.id
+              ? {
+                ...item,
+                prices: item.prices.map((price) =>
+                  price.currency.symbol === action.payload.symbol
+                    ? {
+                        ...price,
+                        amount: action.payload.price,
+                      }
+                    : price
+                ),
+              }
+              : item
+          ),
+        };
+      }
+
+      return state;
+    }
+    
     default:
       return state;
   }

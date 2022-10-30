@@ -74,7 +74,7 @@ class CartItems extends Component {
 
             <ItemPrice 
                 symbol={this.props.currency.symbol}
-                prices={item.prices}
+                item={item}
                 pfs={this.props.pfs} pfw={this.props.pfw} 
                 imb={this.props.imb} />
             {
