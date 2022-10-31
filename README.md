@@ -1,4 +1,5 @@
 # React Shopping Cart App 
+Find assignment brief at [this link](https://www.notion.so/Entry-React-developer-TEST-39f601f8aa3f48ac88c4a8fefda304c1)
 
 ## Documentation
 The documentation is provided using JSDOc Library. Open [JsDoc](./docs/index.html) 
