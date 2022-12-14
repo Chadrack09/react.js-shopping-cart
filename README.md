@@ -43,7 +43,3 @@ Serve the build folder using the following command:
 ### Advanced Configuration
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This application was hosted to vercel cloud platform at [this link](https://react-shopping-cart-app-sand.vercel.app/).
